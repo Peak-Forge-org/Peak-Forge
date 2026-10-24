@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ورود / ثبت‌نام</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <main class="auth">
+      <header class="brand">
+        <div class="logo" aria-hidden="true">◆</div>
+        <h1>پلتفرم ورزشی</h1>
+        <p class="muted">تمرین، تغذیه و پیشرفت، در کنار مربی شما</p>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" type="button" role="tab" data-mode="login">
+          ورود
+        </button>
+        <button class="tab" type="button" role="tab" data-mode="signup">
+          ثبت‌نام
+        </button>
+      </div>
+
+      <section id="loginPanel" class="card">
+        <form id="loginForm" novalidate>
+          <label class="field"
+            >ایمیل
+            <input
+              name="email"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              dir="ltr"
+            />
+            <small class="err" aria-live="polite"></small>
+          </label>
+          <label class="field"
+            >رمز عبور
+            <span class="pw">
+              <input
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                dir="ltr"
+              />
+              <button type="button" class="eye" aria-label="نمایش رمز">
+                نمایش
+              </button>
+            </span>
+            <small class="err" aria-live="polite"></small>
+          </label>
+          <a href="#" class="link" id="forgot">رمز عبور را فراموش کرده‌اید؟</a>
+          <button class="btn primary" type="submit">ورود</button>
+          <p class="switch muted">
+            حساب ندارید؟
+            <button type="button" class="link" data-go="signup">
+              ثبت‌نام کنید
+            </button>
+          </p>
+        </form>
+      </section>
+
+      <section id="signupPanel" class="card" hidden>
+        <ol class="steps" id="steps" aria-label="مراحل ثبت‌نام">
+          <li class="on">نقش</li>
+          <li>حساب</li>
+          <li>مشخصات</li>
+        </ol>
+
+        <form id="signupForm" novalidate>
+          <fieldset data-step="1">
+            <legend>می‌خواهید با چه نقشی وارد شوید؟</legend>
+            <div class="roles">
+              <label class="role">
+                <input type="radio" name="role" value="athlete" />
+                <span class="role-box">
+                  <strong>ورزشکار</strong>
+                  <small
+                    >برنامه‌ی تمرین و تغذیه، چت با مربی و پیگیری پیشرفت</small
+                  >
+                </span>
+              </label>
+              <label class="role">
+                <input type="radio" name="role" value="coach" />
+                <span class="role-box">
+                  <strong>مربی</strong>
+                  <small
+                    >مدیریت ورزشکاران، ارسال برنامه و فروشگاه اختصاصی</small
+                  >
+                </span>
+              </label>
+            </div>
+            <small class="err" id="roleErr" aria-live="polite"></small>
+          </fieldset>
+
+          <fieldset data-step="2" hidden>
+            <legend>اطلاعات ورود</legend>
+            <label class="field"
+              >ایمیل
+              <input
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                dir="ltr"
+              />
+              <small class="err" aria-live="polite"></small>
+            </label>
+            <label class="field"
+              >رمز عبور
+              <span class="pw">
+                <input
+                  name="password"
+                  type="password"
+                  autocomplete="new-password"
+                  dir="ltr"
+                />
+                <button type="button" class="eye" aria-label="نمایش رمز">
+                  نمایش
+                </button>
+              </span>
+              <span class="meter" aria-hidden="true"
+                ><i id="meterBar"></i
+              ></span>
+              <small class="hint" id="meterText"
+                >حداقل ۸ کاراکتر، شامل حرف و عدد</small
+              >
+              <small class="err" aria-live="polite"></small>
+            </label>
+            <label class="field"
+              >تکرار رمز عبور
+              <input
+                name="confirm"
+                type="password"
+                autocomplete="new-password"
+                dir="ltr"
+              />
+              <small class="err" aria-live="polite"></small>
+            </label>
+          </fieldset>
+
+          <fieldset data-step="3" hidden>
+            <legend>مشخصات شما</legend>
+            <div class="grid">
+              <label class="field"
+                >نام<input name="first" autocomplete="given-name" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >نام خانوادگی<input
+                  name="last"
+                  autocomplete="family-name" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >قد (سانتی‌متر)<input name="height" inputmode="decimal" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >وزن (کیلوگرم)<input name="weight" inputmode="decimal" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >کشور<input name="country" value="ایران" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >شهر<input name="city" autocomplete="address-level2" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field"
+                >سال‌های سابقه‌ی ورزشی<input
+                  name="years"
+                  inputmode="numeric" /><small
+                  class="err"
+                  aria-live="polite"
+                ></small
+              ></label>
+              <label class="field wide"
+                >توضیح سابقه‌ی ورزشی <em>(اختیاری)</em
+                ><input
+                  name="history"
+                  placeholder="مثلاً ۳ سال بدنسازی، ۲ سال کراس‌فیت"
+              /></label>
+              <label class="field wide"
+                >مدال‌ها و افتخارات <em>(اختیاری)</em
+                ><textarea
+                  name="medals"
+                  rows="2"
+                  placeholder="هر مورد در یک خط"
+                ></textarea>
+              </label>
+            </div>
+            <label class="check">
+              <input type="checkbox" name="terms" />
+              <span>قوانین و حریم خصوصی را می‌پذیرم</span>
+            </label>
+            <small class="err" id="termsErr" aria-live="polite"></small>
+          </fieldset>
+
+          <div class="nav">
+            <button class="btn ghost" type="button" id="backBtn" hidden>
+              قبلی
+            </button>
+            <button class="btn primary" type="submit" id="nextBtn">
+              ادامه
+            </button>
+          </div>
+          <p class="switch muted">
+            حساب دارید؟
+            <button type="button" class="link" data-go="login">
+              وارد شوید
+            </button>
+          </p>
+        </form>
+
+        <div id="done" class="done" hidden>
+          <div class="check-big" aria-hidden="true">✓</div>
+          <h2 id="doneTitle"></h2>
+          <p class="muted">
+            حساب شما با اشتراک رایگان ساخته شد. هر زمان بخواهید می‌توانید به
+            Premium ارتقا دهید.
+          </p>
+          <a class="btn primary" id="doneLink" href="#">ورود به برنامه</a>
+        </div>
+      </section>
+    </main>
+    <script src="./auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رژیم غذایی</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ath_free_diet.css" />
+    <link rel="stylesheet" href="ath_free_lock.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="title">برنامه‌ی غذایی امروز</h1>
+
+      <section class="card progress-card">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="ring-text">
+            <strong id="percent">۰٪</strong>
+            <span>انجام‌شده</span>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="cal-line">
+            <span id="calDone">۰</span> از <span id="calTotal">۰</span> وعده
+          </div>
+          <button
+            type="button"
+            class="lock-card"
+            data-premium="محاسبه‌ی کالری و درشت‌مغذی‌ها (Meal Planner)"
+          >
+            <span class="lock-ico">🔒</span>
+            <span
+              ><strong>کالری و درشت‌مغذی‌ها</strong
+              ><small>پروتئین، کربوهیدرات و چربی هر وعده</small></span
+            >
+            <span class="pro">Premium</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>کل دوره‌ی رژیم</h2>
+          <span class="muted">هفته‌ی ۳ از ۸</span>
+        </div>
+        <div class="bar big"><i style="width: 37.5%"></i></div>
+        <div class="row-head small">
+          <span class="muted">۳۷٪ از رژیم طی شده</span
+          ><span class="muted">۵ هفته مانده</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>پایبندی این هفته</h2>
+        <div class="week" id="week"></div>
+      </section>
+
+      <section class="meals" id="meals"></section>
+
+      <button
+        type="button"
+        class="lock-card"
+        data-premium="برنامه‌ی غذایی شخصی و گزارش تغذیه"
+      >
+        <span class="lock-ico">🔒</span>
+        <span
+          ><strong>برنامه‌ی غذایی شخصی</strong
+          ><small>محاسبه‌ی کالری، درشت‌مغذی‌ها و جایگزین‌های غذایی</small></span
+        >
+        <span class="pro">Premium</span>
+      </button>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./ath_free_chat.html">
+          <img src="./icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="./ath_free_exercise.html">
+          <img src="./icons/dumbbell-ray.png" alt="تمرین" />
+        </a>
+      </div>
+
+      <div class="selected">
+        <img src="./icons/hamburger-soda.svg" alt="تغذیه" />
+      </div>
+
+      <div class="icon">
+        <a href="./ath_free_user.html">
+          <img src="./icons/user.png" alt="پروفایل" />
+        </a>
+      </div>
+    </div>
+    <script src="./ath_free_common.js"></script>
+    <script src="./ath_free_diet.js"></script>
+  </body>
+</html>

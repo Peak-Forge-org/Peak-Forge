@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پروفایل مربی</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="coach_pre_base.css" />
+    <link rel="stylesheet" href="coach_pre_user.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card head">
+        <div class="avatar big" id="avatar"></div>
+        <div class="head-info">
+          <h1 id="fullName"></h1>
+          <p class="muted" id="place"></p>
+          <p class="muted" id="history"></p>
+        </div>
+        <span class="tag">Premium · مربی</span>
+      </section>
+
+      <section class="stats4 three">
+        <div class="stat"><strong id="sAth"></strong><span>ورزشکار</span></div>
+        <div class="stat">
+          <strong id="sYears"></strong><span>سال سابقه</span>
+        </div>
+        <div class="stat">
+          <strong id="sProd"></strong><span>محصول فروشگاه</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>مدال‌ها و افتخارات</h2>
+        <ul class="medals" id="medals"></ul>
+      </section>
+
+      <form class="card" id="profileForm">
+        <div class="row-head">
+          <h2>اطلاعات شخصی</h2>
+          <button type="button" class="btn" id="editBtn">ویرایش</button>
+        </div>
+        <div class="fields">
+          <label class="field">نام<input name="first" disabled /></label>
+          <label class="field"
+            >نام خانوادگی<input name="last" disabled
+          /></label>
+          <label class="field"
+            >قد (سانتی‌متر)<input
+              name="height"
+              type="number"
+              min="100"
+              max="250"
+              disabled
+          /></label>
+          <label class="field"
+            >وزن (کیلوگرم)<input
+              name="weight"
+              type="number"
+              min="30"
+              max="250"
+              step="0.1"
+              disabled
+          /></label>
+          <label class="field">شهر<input name="city" disabled /></label>
+          <label class="field">کشور<input name="country" disabled /></label>
+          <label class="field wide"
+            >سابقه‌ی ورزشی و مربیگری<input name="history" disabled
+          /></label>
+        </div>
+      </form>
+
+      <section class="card" id="store">
+        <div class="row-head">
+          <h2 id="storeName"></h2>
+          <span class="muted">فروشگاه اختصاصی</span>
+        </div>
+        <div class="products" id="products"></div>
+        <form class="form-row" id="prodForm">
+          <label class="field">نام محصول<input id="pName" required /></label>
+          <label class="field"
+            >قیمت (تومان)<input
+              id="pPrice"
+              type="number"
+              min="0"
+              step="1000"
+              required
+          /></label>
+          <button class="btn" type="submit">ثبت محصول</button>
+        </form>
+        <p class="muted note">
+          برای استفاده از فروشگاه، هزینه یا کارمزد طبق تعرفه‌ی پلتفرم دریافت
+          می‌شود.
+        </p>
+      </section>
+
+      <section class="card" id="settings">
+        <h2>اعلان‌ها و یادآوری</h2>
+        <div class="set-row">
+          <div>
+            <strong>یادآوری خودکار</strong>
+            <p class="muted">ارسال پیام به ورزشکاری که تمرین ثبت نکرده</p>
+          </div>
+          <label class="switch"
+            ><input type="checkbox" id="autoRemind" /><span></span
+          ></label>
+        </div>
+        <div class="set-row">
+          <div><strong>بعد از چند روز بدون تمرین؟</strong></div>
+          <select id="idleDays" aria-label="تعداد روز"></select>
+        </div>
+        <div class="set-row">
+          <div>
+            <strong>تغییر مهم وزن</strong>
+            <p class="muted">اعلان وقتی وزن ورزشکار تغییر قابل‌توجه دارد</p>
+          </div>
+          <label class="switch"
+            ><input type="checkbox" id="weight" /><span></span
+          ></label>
+        </div>
+        <div class="set-row">
+          <div>
+            <strong>رکورد جدید</strong>
+            <p class="muted">اعلان ثبت رکورد شخصی ورزشکار</p>
+          </div>
+          <label class="switch"
+            ><input type="checkbox" id="pr" /><span></span
+          ></label>
+        </div>
+        <div class="set-row">
+          <div>
+            <strong>پیام اولویت‌دار</strong>
+            <p class="muted">اعلان فوری برای پیام‌های Priority</p>
+          </div>
+          <label class="switch"
+            ><input type="checkbox" id="priority" /><span></span
+          ></label>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./coach_pre_chat.html"
+          ><img src="./icons/comments (1).png" alt="چت"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="./coach_pre_athletes.html"
+          ><img src="./icons/users.png" alt="ورزشکاران"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="./coach_pre_programs.html"
+          ><img src="./icons/dumbbell-ray.png" alt="برنامه‌ها"
+        /></a>
+      </div>
+      <div class="selected"><img src="./icons/user.svg" alt="پروفایل" /></div>
+    </div>
+    <script src="./coach_pre_common.js"></script>
+    <script src="./coach_pre_user.js"></script>
+  </body>
+</html>

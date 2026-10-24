@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>برنامه‌ی تمرینی</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ath_free_exercise.css" />
+    <link rel="stylesheet" href="ath_free_lock.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="title">برنامه‌ی تمرینی</h1>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>این هفته</h2>
+          <span class="muted">برای دیدن برنامه، روی روز بزنید</span>
+        </div>
+        <div class="week" id="week"></div>
+      </section>
+
+      <section class="card day-card" id="dayCard">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="ring-text">
+            <strong id="percent">۰٪</strong>
+            <span>انجام‌شده</span>
+          </div>
+        </div>
+        <div class="day-info">
+          <h2 id="dayName"></h2>
+          <p class="muted" id="dayFocus"></p>
+          <p class="count" id="dayCount"></p>
+        </div>
+      </section>
+
+      <div id="lists">
+        <section class="list-block">
+          <h3>باقی‌مانده <span class="badge" id="todoN"></span></h3>
+          <div class="list" id="todoList"></div>
+        </section>
+        <section class="list-block">
+          <h3>انجام‌شده <span class="badge" id="doneN"></span></h3>
+          <div class="list" id="doneList"></div>
+        </section>
+      </div>
+      <section class="card rest" id="restBox" hidden>
+        <strong>امروز روز استراحت است</strong>
+        <p class="muted">
+          ریکاوری هم بخشی از برنامه است. کشش سبک و خواب کافی فراموش نشود.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>کل دوره‌ی تمرین</h2>
+          <span class="muted" id="programWeek"></span>
+        </div>
+        <div class="bar big"><i id="programBar"></i></div>
+        <div class="row-head small">
+          <span class="muted" id="programText"></span>
+          <span class="muted" id="programLeft"></span>
+        </div>
+      </section>
+
+      <section class="lock-grid">
+        <button
+          type="button"
+          class="lock-card"
+          data-premium="رکورد شخصی و روند پیشرفت تمرین"
+        >
+          <span class="lock-ico">🔒</span>
+          <span
+            ><strong>رکوردها و جزئیات تمرین</strong
+            ><small>ثبت وزنه، تکرار، استراحت و رکورد شخصی</small></span
+          >
+          <span class="pro">Premium</span>
+        </button>
+        <button
+          type="button"
+          class="lock-card"
+          data-premium="مقایسه‌ی ماهانه و گزارش عملکرد"
+        >
+          <span class="lock-ico">🔒</span>
+          <span
+            ><strong>مقایسه و گزارش ماهانه</strong
+            ><small>مقایسه‌ی ماه‌ها و خروجی PDF</small></span
+          >
+          <span class="pro">Premium</span>
+        </button>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./ath_free_chat.html">
+          <img src="./icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="selected">
+        <img src="./icons/dumbbell-ray.svg" alt="تمرین" />
+      </div>
+
+      <div class="icon">
+        <a href="./ath_free_diet.html">
+          <img src="./icons/hamburger-soda.png" alt="تغذیه" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="./ath_free_user.html">
+          <img src="./icons/user.png" alt="پروفایل" />
+        </a>
+      </div>
+    </div>
+    <script src="./ath_free_common.js"></script>
+    <script src="./ath_free_exercise.js"></script>
+  </body>
+</html>

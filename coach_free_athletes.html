@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ورزشکاران من</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="coach_free_base.css" />
+    <link rel="stylesheet" href="coach_free_athletes.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>ورزشکاران من</h1>
+
+      <section class="stats4">
+        <div class="stat">
+          <strong id="sTotal"></strong><span>کل ورزشکاران</span>
+        </div>
+        <div class="stat">
+          <strong id="sActive"></strong><span>فعال امروز</span>
+        </div>
+        <div class="stat">
+          <strong id="sAttn"></strong><span>نیازمند توجه</span>
+        </div>
+        <div class="stat">
+          <strong id="sAvg"></strong><span>میانگین پایبندی</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>هشدارها <span class="badge" id="alertN"></span></h2>
+          <a class="muted" href="./coach_free_user.html#settings"
+            >تنظیم اعلان‌ها</a
+          >
+        </div>
+        <div class="alerts" id="alerts"></div>
+        <button
+          type="button"
+          class="lock-card"
+          data-premium="اعلان و یادآوری پیشرفته"
+        >
+          <span class="lock-ico">🔒</span>
+          <span
+            ><strong>اعلان تغییر وزن و رکورد</strong
+            ><small>یادآوری خودکار و پیگیری وضعیت ورزشکاران</small></span
+          >
+          <span class="pro">Premium</span>
+        </button>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>پیشرفت ورزشکاران</h2>
+          <span class="muted">پایبندی به برنامه</span>
+        </div>
+        <div
+          class="chips"
+          id="filters"
+          role="group"
+          aria-label="دسته‌بندی"
+        ></div>
+        <div class="athletes" id="athletes"></div>
+        <button
+          type="button"
+          class="lock-card"
+          data-premium="نمودار پیشرفت تمام ورزشکاران"
+        >
+          <span class="lock-ico">🔒</span>
+          <span
+            ><strong>نمودار مقایسه‌ی همه‌ی ورزشکاران</strong
+            ><small>پیشرفت تمام ورزشکاران کنار هم</small></span
+          >
+          <span class="pro">Premium</span>
+        </button>
+      </section>
+
+      <form class="card" id="addForm">
+        <h2>افزودن ورزشکار</h2>
+        <div class="form-row">
+          <label class="field"
+            >نام و نام خانوادگی<input id="newName" required
+          /></label>
+          <button class="btn" type="submit">افزودن</button>
+        </div>
+        <p class="muted" id="limitNote"></p>
+      </form>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./coach_free_chat.html"
+          ><img src="./icons/comments (1).png" alt="چت"
+        /></a>
+      </div>
+      <div class="selected">
+        <img src="./icons/users.svg" alt="ورزشکاران" />
+      </div>
+      <div class="icon">
+        <a href="./coach_free_programs.html"
+          ><img src="./icons/dumbbell-ray.png" alt="برنامه‌ها"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="./coach_free_user.html"
+          ><img src="./icons/user.png" alt="پروفایل"
+        /></a>
+      </div>
+    </div>
+    <script src="./coach_free_common.js"></script>
+    <script src="./coach_free_athletes.js"></script>
+  </body>
+</html>

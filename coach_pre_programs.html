@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مدیریت برنامه‌ها</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="coach_pre_base.css" />
+    <link rel="stylesheet" href="coach_pre_programs.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>مدیریت برنامه‌ها</h1>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-target="tplPanel" role="tab">
+          قالب‌ها
+        </button>
+        <button class="tab" data-target="calPanel" role="tab">
+          تقویم تمرینی
+        </button>
+      </div>
+
+      <div id="tplPanel" class="panel">
+        <div class="list" id="templates"></div>
+        <form class="card" id="tplForm">
+          <h2>ساخت قالب جدید</h2>
+          <div class="form-row">
+            <label class="field">نام قالب<input id="tplName" required /></label>
+            <label class="field"
+              >نوع<select id="tplType">
+                <option>تمرینی</option>
+                <option>غذایی</option>
+              </select></label
+            >
+            <label class="field"
+              >مدت (هفته)<input
+                id="tplWeeks"
+                type="number"
+                min="1"
+                max="52"
+                value="4"
+            /></label>
+            <button class="btn" type="submit">ساخت</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="calPanel" class="panel" hidden>
+        <div class="list" id="calendar"></div>
+        <form class="card" id="calForm">
+          <h2>زمان‌بندی برنامه</h2>
+          <div class="form-row">
+            <label class="field">روز<select id="calDay"></select></label>
+            <label class="field">قالب<select id="calTpl"></select></label>
+            <label class="field">برای<select id="calTarget"></select></label>
+            <button class="btn" type="submit">افزودن</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <dialog id="sendDlg">
+      <h2 id="sendTitle"></h2>
+      <p class="muted">ورزشکاران مقصد را انتخاب کنید</p>
+      <div class="chips" id="sendCats"></div>
+      <div class="checks" id="sendList"></div>
+      <div class="form-row dlg-actions">
+        <button class="btn" type="button" id="sendGo">ارسال</button>
+        <button class="btn ghost" type="button" id="sendCancel">انصراف</button>
+      </div>
+    </dialog>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./coach_pre_chat.html"
+          ><img src="./icons/comments (1).png" alt="چت"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="./coach_pre_athletes.html"
+          ><img src="./icons/users.png" alt="ورزشکاران"
+        /></a>
+      </div>
+      <div class="selected">
+        <img src="./icons/dumbbell-ray.svg" alt="برنامه‌ها" />
+      </div>
+      <div class="icon">
+        <a href="./coach_pre_user.html"
+          ><img src="./icons/user.png" alt="پروفایل"
+        /></a>
+      </div>
+    </div>
+    <script src="./coach_pre_common.js"></script>
+    <script src="./coach_pre_programs.js"></script>
+  </body>
+</html>

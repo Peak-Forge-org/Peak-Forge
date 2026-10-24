@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رژیم غذایی</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ath_pre_diet.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="title">برنامه‌ی غذایی امروز</h1>
+
+      <section class="card progress-card">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="ring-text">
+            <strong id="percent">۰٪</strong>
+            <span>انجام‌شده</span>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="cal-line">
+            <span id="calDone">۰</span> از
+            <span id="calTotal">۰</span> کیلوکالری
+          </div>
+          <div class="macro" data-key="p">
+            <span>پروتئین</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+          <div class="macro" data-key="c">
+            <span>کربوهیدرات</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+          <div class="macro" data-key="f">
+            <span>چربی</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>کل دوره‌ی رژیم</h2>
+          <span class="muted">هفته‌ی ۳ از ۸</span>
+        </div>
+        <div class="bar big"><i style="width: 37.5%"></i></div>
+        <div class="row-head small">
+          <span class="muted">۳۷٪ از رژیم طی شده</span
+          ><span class="muted">۵ هفته مانده</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>پایبندی این هفته</h2>
+        <div class="week" id="week"></div>
+      </section>
+
+      <section class="meals" id="meals"></section>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./ath_pre_chat.html">
+          <img src="./icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="./ath_pre_exercise.html">
+          <img src="./icons/dumbbell-ray.png" alt="تمرین" />
+        </a>
+      </div>
+
+      <div class="selected">
+        <img src="./icons/hamburger-soda.svg" alt="تغذیه" />
+      </div>
+
+      <div class="icon">
+        <a href="./ath_pre_user.html">
+          <img src="./icons/user.png" alt="پروفایل" />
+        </a>
+      </div>
+    </div>
+    <script src="./ath_pre_diet.js"></script>
+  </body>
+</html>

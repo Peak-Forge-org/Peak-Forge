@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مدیریت برنامه‌ها</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="coach_free_base.css" />
+    <link rel="stylesheet" href="coach_free_programs.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>مدیریت برنامه‌ها</h1>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" type="button" role="tab">برنامه‌ها</button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          data-premium="قالب‌های برنامه (ساخت، کپی و شخصی‌سازی)"
+        >
+          🔒 قالب‌ها
+        </button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          data-premium="تقویم تمرینی"
+        >
+          🔒 تقویم تمرینی
+        </button>
+      </div>
+
+      <div class="list" id="templates"></div>
+
+      <form class="card" id="tplForm">
+        <h2>تعریف برنامه‌ی جدید</h2>
+        <div class="form-row">
+          <label class="field">نام برنامه<input id="tplName" required /></label>
+          <label class="field"
+            >نوع<select id="tplType">
+              <option>تمرینی</option>
+              <option>غذایی</option>
+            </select></label
+          >
+          <label class="field"
+            >مدت (هفته)<input
+              id="tplWeeks"
+              type="number"
+              min="1"
+              max="52"
+              value="4"
+          /></label>
+          <button class="btn" type="submit">ساخت</button>
+        </div>
+      </form>
+
+      <button
+        type="button"
+        class="lock-card"
+        data-premium="ارسال گروهی برنامه و تقویم تمرینی"
+      >
+        <span class="lock-ico">🔒</span>
+        <span
+          ><strong>ارسال گروهی و تقویم</strong
+          ><small>ارسال یک برنامه به چند ورزشکار و زمان‌بندی هفتگی</small></span
+        >
+        <span class="pro">Premium</span>
+      </button>
+    </main>
+
+    <dialog id="sendDlg">
+      <h2 id="sendTitle"></h2>
+      <p class="muted">ورزشکار مقصد را انتخاب کنید</p>
+      <div class="checks" id="sendList"></div>
+      <div class="form-row dlg-actions">
+        <button class="btn" type="button" id="sendGo">ارسال</button>
+        <button class="btn ghost" type="button" id="sendCancel">انصراف</button>
+      </div>
+    </dialog>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./coach_free_chat.html"
+          ><img src="./icons/comments (1).png" alt="چت"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="./coach_free_athletes.html"
+          ><img src="./icons/users.png" alt="ورزشکاران"
+        /></a>
+      </div>
+      <div class="selected">
+        <img src="./icons/dumbbell-ray.svg" alt="برنامه‌ها" />
+      </div>
+      <div class="icon">
+        <a href="./coach_free_user.html"
+          ><img src="./icons/user.png" alt="پروفایل"
+        /></a>
+      </div>
+    </div>
+    <script src="./coach_free_common.js"></script>
+    <script src="./coach_free_programs.js"></script>
+  </body>
+</html>

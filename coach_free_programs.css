@@ -1,0 +1,122 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.panel[hidden] {
+  display: none;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tpl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.tpl-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tpl-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.tpl-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.type {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.05rem 0.6rem;
+  border-radius: 1rem;
+  background: var(--red);
+  color: var(--black);
+}
+.type.food {
+  background: var(--white);
+}
+
+/* تقویم */
+.day-card {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+.day-card.today {
+  outline: 2px solid var(--red);
+}
+.day-name {
+  width: 4.2rem;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.day-name small {
+  display: block;
+  color: var(--red);
+  font-size: 0.7rem;
+}
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1;
+}
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--black);
+  border-radius: 0.7rem;
+  padding: 0.25rem 0.3rem 0.25rem 0.7rem;
+  font-size: 0.78rem;
+  border-inline-start: 3px solid var(--red);
+}
+.slot small {
+  color: var(--muted);
+}
+.slots .muted {
+  padding-top: 0.2rem;
+}
+
+#sendDlg .chips {
+  margin: 0.7rem 0;
+}
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--black);
+  border-radius: 0.7rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.check-row input {
+  accent-color: var(--red);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.check-row small {
+  margin-inline-start: auto;
+  color: var(--muted);
+}
+.dlg-actions {
+  margin-top: 0.9rem;
+}

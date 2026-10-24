@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پروفایل</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ath_pre_user.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card head">
+        <div class="avatar" id="avatar"></div>
+        <div class="head-info">
+          <h1 id="fullName"></h1>
+          <p class="muted" id="place"></p>
+          <p class="muted">مربی: علی رضایی</p>
+        </div>
+        <span class="tag">Premium</span>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <strong id="sHeight"></strong><span>قد (سانتی‌متر)</span>
+        </div>
+        <div class="stat">
+          <strong id="sWeight"></strong><span>وزن (کیلوگرم)</span>
+        </div>
+        <div class="stat"><strong id="sBmi"></strong><span>BMI</span></div>
+        <div class="stat">
+          <strong id="sYears"></strong><span>سال سابقه</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>سطح <span id="level"></span></h2>
+          <span class="muted" id="xpText"></span>
+        </div>
+        <div class="bar"><i id="xpBar"></i></div>
+        <div class="mini-stats">
+          <div><strong id="streak"></strong><span>روز استمرار</span></div>
+          <div><strong id="coins"></strong><span>سکه</span></div>
+          <div><strong id="rank"></strong><span>رتبه در جدول</span></div>
+        </div>
+        <div class="badges" id="badges"></div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>روند وزن</h2>
+          <span class="muted" id="weightDelta"></span>
+        </div>
+        <svg
+          class="chart"
+          id="chart"
+          viewBox="0 0 320 140"
+          role="img"
+          aria-label="نمودار وزن در ۸ هفته‌ی اخیر"
+        ></svg>
+      </section>
+
+      <section class="card">
+        <h2>مدال‌ها و افتخارات</h2>
+        <ul class="medals" id="medals"></ul>
+      </section>
+
+      <form class="card" id="profileForm">
+        <div class="row-head">
+          <h2>اطلاعات شخصی</h2>
+          <button type="button" class="btn" id="editBtn">ویرایش</button>
+        </div>
+        <div class="fields">
+          <label>نام <input name="first" disabled /></label>
+          <label>نام خانوادگی <input name="last" disabled /></label>
+          <label
+            >قد (سانتی‌متر)
+            <input name="height" type="number" min="100" max="250" disabled
+          /></label>
+          <label
+            >وزن (کیلوگرم)
+            <input
+              name="weight"
+              type="number"
+              min="30"
+              max="250"
+              step="0.1"
+              disabled
+          /></label>
+          <label>شهر <input name="city" disabled /></label>
+          <label>کشور <input name="country" disabled /></label>
+          <label class="wide"
+            >سابقه‌ی ورزشی <input name="history" disabled
+          /></label>
+        </div>
+      </form>
+
+      <section class="card toggle-row">
+        <div>
+          <strong>یادآوری تمرین و برنامه</strong>
+          <p class="muted">اعلان روزانه برای تمرین و وعده‌های غذایی</p>
+        </div>
+        <label class="switch"
+          ><input type="checkbox" id="notif" checked /><span></span
+        ></label>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="./ath_pre_chat.html">
+          <img src="./icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="./ath_pre_exercise.html">
+          <img src="./icons/dumbbell-ray.png" alt="تمرین" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="./ath_pre_diet.html">
+          <img src="./icons/hamburger-soda.png" alt="تغذیه" />
+        </a>
+      </div>
+
+      <div class="selected">
+        <img src="./icons/user.svg" alt="پروفایل" />
+      </div>
+    </div>
+    <script src="./ath_pre_user.js"></script>
+  </body>
+</html>
