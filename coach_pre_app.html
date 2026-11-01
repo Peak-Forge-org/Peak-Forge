@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ورزشکاران من</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="coach_pre_app.css" />
+  </head>
+  <body>
+    <main id="view-chat" class="chat-page view" hidden>
+      <div class="tabs" id="chat-tabs" role="tablist">
+        <button class="tab active" data-tab="priority" role="tab">اولویت‌دار<span class="badge" id="chat-prioN"></span></button>
+        <button class="tab" data-tab="convs" role="tab">گفت‌وگوها</button>
+        <button class="tab" data-tab="forums" role="tab">تالارها</button>
+      </div>
+      <section id="chat-view"></section>
+    </main>
+    <main id="view-athletes" class="page view" hidden>
+      <h1>ورزشکاران من</h1>
+
+      <section class="stats4">
+        <div class="stat"><strong id="athletes-sTotal"></strong><span>کل ورزشکاران</span></div>
+        <div class="stat"><strong id="athletes-sActive"></strong><span>فعال امروز</span></div>
+        <div class="stat"><strong id="athletes-sAttn"></strong><span>نیازمند توجه</span></div>
+        <div class="stat"><strong id="athletes-sAvg"></strong><span>میانگین پایبندی</span></div>
+      </section>
+
+      <!-- اعلان‌ها و هشدارها -->
+      <section class="card">
+        <div class="row-head">
+          <h2>هشدارها <span class="badge" id="athletes-alertN"></span></h2>
+          <a class="muted" href="#settings">تنظیم اعلان‌ها</a>
+        </div>
+        <div class="alerts" id="athletes-alerts"></div>
+      </section>
+
+      <!-- نمودار پیشرفت همه‌ی ورزشکاران -->
+      <section class="card">
+        <div class="row-head"><h2>پیشرفت ورزشکاران</h2><span class="muted">پایبندی به برنامه</span></div>
+        <div class="chips" id="athletes-filters" role="group" aria-label="دسته‌بندی"></div>
+        <div class="athletes" id="athletes-athletes"></div>
+      </section>
+
+      <!-- افزودن ورزشکار -->
+      <form class="card" id="athletes-addForm">
+        <h2>افزودن ورزشکار</h2>
+        <div class="form-row">
+          <label class="field">نام و نام خانوادگی<input id="athletes-newName" required /></label>
+          <label class="field">دسته<select id="athletes-newCat"></select></label>
+          <button class="btn" type="submit">افزودن</button>
+        </div>
+      </form>
+    </main>
+    <main id="view-programs" class="page view" hidden>
+      <h1>مدیریت برنامه‌ها</h1>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-target="tplPanel" role="tab">قالب‌ها</button>
+        <button class="tab" data-target="calPanel" role="tab">تقویم تمرینی</button>
+      </div>
+
+      <!-- قالب‌ها -->
+      <div id="programs-tplPanel" class="panel">
+        <div class="list" id="programs-templates"></div>
+        <form class="card" id="programs-tplForm">
+          <h2>ساخت قالب جدید</h2>
+          <div class="form-row">
+            <label class="field">نام قالب<input id="programs-tplName" required /></label>
+            <label class="field">نوع<select id="programs-tplType"><option>تمرینی</option><option>غذایی</option></select></label>
+            <label class="field">مدت (هفته)<input id="programs-tplWeeks" type="number" min="1" max="52" value="4" /></label>
+            <button class="btn" type="submit">ساخت</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- تقویم -->
+      <div id="programs-calPanel" class="panel" hidden>
+        <div class="list" id="programs-calendar"></div>
+        <form class="card" id="programs-calForm">
+          <h2>زمان‌بندی برنامه</h2>
+          <div class="form-row">
+            <label class="field">روز<select id="programs-calDay"></select></label>
+            <label class="field">قالب<select id="programs-calTpl"></select></label>
+            <label class="field">برای<select id="programs-calTarget"></select></label>
+            <button class="btn" type="submit">افزودن</button>
+          </div>
+        </form>
+      </div>
+    
+    <dialog id="programs-sendDlg">
+      <h2 id="programs-sendTitle"></h2>
+      <p class="muted">ورزشکاران مقصد را انتخاب کنید</p>
+      <div class="chips" id="programs-sendCats"></div>
+      <div class="checks" id="programs-sendList"></div>
+      <div class="form-row dlg-actions">
+        <button class="btn" type="button" id="programs-sendGo">ارسال</button>
+        <button class="btn ghost" type="button" id="programs-sendCancel">انصراف</button>
+      </div>
+    </dialog>
+    </main>
+    <main id="view-user" class="page view" hidden>
+      <section class="card head">
+        <div class="avatar big" id="user-avatar"></div>
+        <div class="head-info">
+          <h1 id="user-fullName"></h1>
+          <p class="muted" id="user-place"></p>
+          <p class="muted" id="user-history"></p>
+        </div>
+        <span class="tag">Premium · مربی</span>
+      </section>
+
+      <section class="stats4 three">
+        <div class="stat"><strong id="user-sAth"></strong><span>ورزشکار</span></div>
+        <div class="stat"><strong id="user-sYears"></strong><span>سال سابقه</span></div>
+        <div class="stat"><strong id="user-sProd"></strong><span>محصول فروشگاه</span></div>
+      </section>
+
+      <section class="card">
+        <h2>مدال‌ها و افتخارات</h2>
+        <ul class="medals" id="user-medals"></ul>
+      </section>
+
+      <form class="card" id="user-profileForm">
+        <div class="row-head"><h2>اطلاعات شخصی</h2><button type="button" class="btn" id="user-editBtn">ویرایش</button></div>
+        <div class="fields">
+          <label class="field">نام<input name="first" disabled /></label>
+          <label class="field">نام خانوادگی<input name="last" disabled /></label>
+          <label class="field">قد (سانتی‌متر)<input name="height" type="number" min="100" max="250" disabled /></label>
+          <label class="field">وزن (کیلوگرم)<input name="weight" type="number" min="30" max="250" step="0.1" disabled /></label>
+          <label class="field">شهر<input name="city" disabled /></label>
+          <label class="field">کشور<input name="country" disabled /></label>
+          <label class="field wide">سابقه‌ی ورزشی و مربیگری<input name="history" disabled /></label>
+        </div>
+      </form>
+
+      <!-- فروشگاه -->
+      <section class="card" id="user-store">
+        <div class="row-head"><h2 id="user-storeName"></h2><span class="muted">فروشگاه اختصاصی</span></div>
+        <div class="products" id="user-products"></div>
+        <form class="form-row" id="user-prodForm">
+          <label class="field">نام محصول<input id="user-pName" required /></label>
+          <label class="field">قیمت (تومان)<input id="user-pPrice" type="number" min="0" step="1000" required /></label>
+          <button class="btn" type="submit">ثبت محصول</button>
+        </form>
+        <p class="muted note">برای استفاده از فروشگاه، هزینه یا کارمزد طبق تعرفه‌ی پلتفرم دریافت می‌شود.</p>
+      </section>
+
+      <!-- تنظیمات اعلان -->
+      <section class="card" id="user-settings">
+        <h2>اعلان‌ها و یادآوری</h2>
+        <div class="set-row">
+          <div><strong>یادآوری خودکار</strong><p class="muted">ارسال پیام به ورزشکاری که تمرین ثبت نکرده</p></div>
+          <label class="switch"><input type="checkbox" id="user-autoRemind" /><span></span></label>
+        </div>
+        <div class="set-row">
+          <div><strong>بعد از چند روز بدون تمرین؟</strong></div>
+          <select id="user-idleDays" aria-label="تعداد روز"></select>
+        </div>
+        <div class="set-row">
+          <div><strong>تغییر مهم وزن</strong><p class="muted">اعلان وقتی وزن ورزشکار تغییر قابل‌توجه دارد</p></div>
+          <label class="switch"><input type="checkbox" id="user-weight" /><span></span></label>
+        </div>
+        <div class="set-row">
+          <div><strong>رکورد جدید</strong><p class="muted">اعلان ثبت رکورد شخصی ورزشکار</p></div>
+          <label class="switch"><input type="checkbox" id="user-pr" /><span></span></label>
+        </div>
+        <div class="set-row">
+          <div><strong>پیام اولویت‌دار</strong><p class="muted">اعلان فوری برای پیام‌های Priority</p></div>
+          <label class="switch"><input type="checkbox" id="user-priority" /><span></span></label>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="icon" data-view="chat" data-src="./icons/comments (1).png" data-active-src="./icons/comments (1).svg">
+        <a href="#chat">
+          <img src="./icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="athletes" data-src="./icons/users.png" data-active-src="./icons/users.svg">
+        <a href="#athletes">
+          <img src="./icons/users.png" alt="ورزشکاران" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="programs" data-src="./icons/dumbbell-ray.png" data-active-src="./icons/dumbbell-ray.svg">
+        <a href="#programs">
+          <img src="./icons/dumbbell-ray.png" alt="برنامه‌ها" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="user" data-src="./icons/user.png" data-active-src="./icons/user.svg">
+        <a href="#user">
+          <img src="./icons/user.png" alt="پروفایل" />
+        </a>
+      </div>
+    </div>
+    <script src="./coach_pre_app.js"></script>
+  </body>
+</html>

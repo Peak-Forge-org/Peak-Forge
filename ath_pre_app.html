@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چت</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ath_pre_app.css" />
+  </head>
+  <body>
+    <main id="view-chat" class="chat-page view" hidden>
+      <header class="chat-header">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-target="coach" role="tab">
+            مربی من
+          </button>
+          <button class="tab" data-target="forum" role="tab">
+            تالار گفت‌وگو
+          </button>
+        </div>
+      </header>
+
+      <section class="panel active" id="chat-coach">
+        <div class="peer">
+          <div class="avatar">ع</div>
+          <div>
+            <div class="peer-name">مربی علی رضایی</div>
+            <div class="peer-status">آنلاین</div>
+          </div>
+        </div>
+
+        <div class="messages" id="chat-coachMessages">
+          <div class="day">امروز</div>
+          <div class="msg in">
+            سلام! برنامه‌ی این هفته رو گذاشتم، ببین سؤالی داشتی بپرس.<span
+              class="time"
+              >۹:۱۰</span
+            >
+          </div>
+          <div class="msg out">
+            سلام مربی، ممنون. تمرین سه‌شنبه رو می‌تونم بذارم برای چهارشنبه؟<span
+              class="time"
+              >۹:۱۶</span
+            >
+          </div>
+          <div class="msg in">
+            مشکلی نیست، فقط روز استراحتت رو جابه‌جا کن.<span class="time"
+              >۹:۲۰</span
+            >
+          </div>
+        </div>
+
+        <form class="composer" data-list="coachMessages" data-priority="true">
+          <button
+            type="button"
+            class="priority-btn"
+            title="پیام اولویت‌دار (Premium)"
+            aria-pressed="false"
+          >
+            ★
+          </button>
+          <input
+            type="text"
+            placeholder="پیام خود را بنویسید…"
+            aria-label="پیام"
+          />
+          <button type="submit" class="send-btn" aria-label="ارسال">➤</button>
+        </form>
+      </section>
+
+      <section class="panel" id="chat-forum">
+        <div class="peer">
+          <div class="avatar group">گ</div>
+          <div>
+            <div class="peer-name">گروه ورزشکاران مربی علی</div>
+            <div class="peer-status">۱۲ عضو · تحت نظر مربی</div>
+          </div>
+        </div>
+
+        <div class="messages" id="chat-forumMessages">
+          <div class="day">امروز</div>
+          <div class="msg in coach-msg">
+            <span class="sender">مربی علی · مربی</span>یادتون نره امروز ثبت وزن
+            و رکوردها فراموش نشه.<span class="time">۸:۰۰</span>
+          </div>
+          <div class="msg in">
+            <span class="sender">سارا</span>رکورد جدید ددلیفتم ثبت شد! ۸۵ کیلو
+            💪<span class="time">۱۰:۳۲</span>
+          </div>
+          <div class="msg out">
+            تبریک سارا، عالیه!<span class="time">۱۰:۳۵</span>
+          </div>
+        </div>
+
+        <form class="composer" data-list="forumMessages">
+          <input
+            type="text"
+            placeholder="پیام به گروه…"
+            aria-label="پیام به گروه"
+          />
+          <button type="submit" class="send-btn" aria-label="ارسال">➤</button>
+        </form>
+      </section>
+    </main>
+    <main id="view-exercise" class="page view" hidden>
+      <h1 class="title">برنامه‌ی تمرینی</h1>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>این هفته</h2>
+          <span class="muted">برای دیدن برنامه، روی روز بزنید</span>
+        </div>
+        <div class="week" id="exercise-week"></div>
+      </section>
+
+      <section class="card day-card" id="exercise-dayCard">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="exercise-ringFill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="ring-text">
+            <strong id="exercise-percent">۰٪</strong>
+            <span>انجام‌شده</span>
+          </div>
+        </div>
+        <div class="day-info">
+          <h2 id="exercise-dayName"></h2>
+          <p class="muted" id="exercise-dayFocus"></p>
+          <p class="count" id="exercise-dayCount"></p>
+        </div>
+      </section>
+
+      <div id="exercise-lists">
+        <section class="list-block">
+          <h3>باقی‌مانده <span class="badge" id="exercise-todoN"></span></h3>
+          <div class="list" id="exercise-todoList"></div>
+        </section>
+        <section class="list-block">
+          <h3>انجام‌شده <span class="badge" id="exercise-doneN"></span></h3>
+          <div class="list" id="exercise-doneList"></div>
+        </section>
+      </div>
+      <section class="card rest" id="exercise-restBox" hidden>
+        <strong>امروز روز استراحت است</strong>
+        <p class="muted">
+          ریکاوری هم بخشی از برنامه است. کشش سبک و خواب کافی فراموش نشود.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>کل دوره‌ی تمرین</h2>
+          <span class="muted" id="exercise-programWeek"></span>
+        </div>
+        <div class="bar big"><i id="exercise-programBar"></i></div>
+        <div class="row-head small">
+          <span class="muted" id="exercise-programText"></span>
+          <span class="muted" id="exercise-programLeft"></span>
+        </div>
+      </section>
+    </main>
+    <main id="view-diet" class="page view" hidden>
+      <h1 class="title">برنامه‌ی غذایی امروز</h1>
+
+      <section class="card progress-card">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="diet-ringFill" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="ring-text">
+            <strong id="diet-percent">۰٪</strong>
+            <span>انجام‌شده</span>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="cal-line">
+            <span id="diet-calDone">۰</span> از
+            <span id="diet-calTotal">۰</span> کیلوکالری
+          </div>
+          <div class="macro" data-key="p">
+            <span>پروتئین</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+          <div class="macro" data-key="c">
+            <span>کربوهیدرات</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+          <div class="macro" data-key="f">
+            <span>چربی</span>
+            <div class="bar"><i></i></div>
+            <em></em>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>کل دوره‌ی رژیم</h2>
+          <span class="muted">هفته‌ی ۳ از ۸</span>
+        </div>
+        <div class="bar big"><i style="width: 37.5%"></i></div>
+        <div class="row-head small">
+          <span class="muted">۳۷٪ از رژیم طی شده</span
+          ><span class="muted">۵ هفته مانده</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>پایبندی این هفته</h2>
+        <div class="week" id="diet-week"></div>
+      </section>
+
+      <section class="meals" id="diet-meals"></section>
+    </main>
+    <main id="view-user" class="page view" hidden>
+      <section class="card head">
+        <div class="avatar" id="user-avatar"></div>
+        <div class="head-info">
+          <h1 id="user-fullName"></h1>
+          <p class="muted" id="user-place"></p>
+          <p class="muted">مربی: علی رضایی</p>
+        </div>
+        <span class="tag">Premium</span>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <strong id="user-sHeight"></strong><span>قد (سانتی‌متر)</span>
+        </div>
+        <div class="stat">
+          <strong id="user-sWeight"></strong><span>وزن (کیلوگرم)</span>
+        </div>
+        <div class="stat"><strong id="user-sBmi"></strong><span>BMI</span></div>
+        <div class="stat">
+          <strong id="user-sYears"></strong><span>سال سابقه</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>سطح <span id="user-level"></span></h2>
+          <span class="muted" id="user-xpText"></span>
+        </div>
+        <div class="bar"><i id="user-xpBar"></i></div>
+        <div class="mini-stats">
+          <div><strong id="user-streak"></strong><span>روز استمرار</span></div>
+          <div><strong id="user-coins"></strong><span>سکه</span></div>
+          <div><strong id="user-rank"></strong><span>رتبه در جدول</span></div>
+        </div>
+        <div class="badges" id="user-badges"></div>
+      </section>
+
+      <section class="card">
+        <div class="row-head">
+          <h2>روند وزن</h2>
+          <span class="muted" id="user-weightDelta"></span>
+        </div>
+        <svg
+          class="chart"
+          id="user-chart"
+          viewBox="0 0 320 140"
+          role="img"
+          aria-label="نمودار وزن در ۸ هفته‌ی اخیر"
+        ></svg>
+      </section>
+
+      <section class="card">
+        <h2>مدال‌ها و افتخارات</h2>
+        <ul class="medals" id="user-medals"></ul>
+      </section>
+
+      <form class="card" id="user-profileForm">
+        <div class="row-head">
+          <h2>اطلاعات شخصی</h2>
+          <button type="button" class="btn" id="user-editBtn">ویرایش</button>
+        </div>
+        <div class="fields">
+          <label>نام <input name="first" disabled /></label>
+          <label>نام خانوادگی <input name="last" disabled /></label>
+          <label
+            >قد (سانتی‌متر)
+            <input name="height" type="number" min="100" max="250" disabled
+          /></label>
+          <label
+            >وزن (کیلوگرم)
+            <input
+              name="weight"
+              type="number"
+              min="30"
+              max="250"
+              step="0.1"
+              disabled
+          /></label>
+          <label>شهر <input name="city" disabled /></label>
+          <label>کشور <input name="country" disabled /></label>
+          <label class="wide"
+            >سابقه‌ی ورزشی <input name="history" disabled
+          /></label>
+        </div>
+      </form>
+
+      <section class="card toggle-row">
+        <div>
+          <strong>یادآوری تمرین و برنامه</strong>
+          <p class="muted">اعلان روزانه برای تمرین و وعده‌های غذایی</p>
+        </div>
+        <label class="switch"
+          ><input type="checkbox" id="user-notif" checked /><span></span
+        ></label>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="selected" data-view="chat" data-src="./icons/comments (1).png" data-active-src="./icons/comments (1).svg">
+        <a href="#chat">
+          <img src="./icons/comments (1).svg" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="exercise" data-src="./icons/dumbbell-ray.png" data-active-src="./icons/dumbbell-ray.svg">
+        <a href="#exercise">
+          <img src="./icons/dumbbell-ray.png" alt="تمرین" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="diet" data-src="./icons/hamburger-soda.png" data-active-src="./icons/hamburger-soda.svg">
+        <a href="#diet">
+          <img src="./icons/hamburger-soda.png" alt="تغذیه" />
+        </a>
+      </div>
+
+      <div class="icon" data-view="user" data-src="./icons/user.png" data-active-src="./icons/user.svg">
+        <a href="#user">
+          <img src="./icons/user.png" alt="پروفایل" />
+        </a>
+      </div>
+    </div>
+    <script src="./ath_pre_app.js"></script>
+  </body>
+</html>
