@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./normalize/normalize.css" />
     <link rel="stylesheet" href="ath_pre_app.css" />
   </head>
   <body>
@@ -120,7 +121,13 @@
         <div class="ring-wrap">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52" />
-            <circle class="ring-fill" id="exercise-ringFill" cx="60" cy="60" r="52" />
+            <circle
+              class="ring-fill"
+              id="exercise-ringFill"
+              cx="60"
+              cy="60"
+              r="52"
+            />
           </svg>
           <div class="ring-text">
             <strong id="exercise-percent">۰٪</strong>
@@ -170,7 +177,13 @@
         <div class="ring-wrap">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52" />
-            <circle class="ring-fill" id="diet-ringFill" cx="60" cy="60" r="52" />
+            <circle
+              class="ring-fill"
+              id="diet-ringFill"
+              cx="60"
+              cy="60"
+              r="52"
+            />
           </svg>
           <div class="ring-text">
             <strong id="diet-percent">۰٪</strong>
@@ -319,25 +332,45 @@
     </main>
 
     <div class="footer">
-      <div class="selected" data-view="chat" data-src="./icons/comments (1).png" data-active-src="./icons/comments (1).svg">
+      <div
+        class="selected"
+        data-view="chat"
+        data-src="./icons/comments (1).png"
+        data-active-src="./icons/comments (1).svg"
+      >
         <a href="#chat">
           <img src="./icons/comments (1).svg" alt="چت" />
         </a>
       </div>
 
-      <div class="icon" data-view="exercise" data-src="./icons/dumbbell-ray.png" data-active-src="./icons/dumbbell-ray.svg">
+      <div
+        class="icon"
+        data-view="exercise"
+        data-src="./icons/dumbbell-ray.png"
+        data-active-src="./icons/dumbbell-ray.svg"
+      >
         <a href="#exercise">
           <img src="./icons/dumbbell-ray.png" alt="تمرین" />
         </a>
       </div>
 
-      <div class="icon" data-view="diet" data-src="./icons/hamburger-soda.png" data-active-src="./icons/hamburger-soda.svg">
+      <div
+        class="icon"
+        data-view="diet"
+        data-src="./icons/hamburger-soda.png"
+        data-active-src="./icons/hamburger-soda.svg"
+      >
         <a href="#diet">
           <img src="./icons/hamburger-soda.png" alt="تغذیه" />
         </a>
       </div>
 
-      <div class="icon" data-view="user" data-src="./icons/user.png" data-active-src="./icons/user.svg">
+      <div
+        class="icon"
+        data-view="user"
+        data-src="./icons/user.png"
+        data-active-src="./icons/user.svg"
+      >
         <a href="#user">
           <img src="./icons/user.png" alt="پروفایل" />
         </a>

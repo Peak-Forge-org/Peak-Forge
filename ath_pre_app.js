@@ -1,19 +1,16 @@
-// کل برنامه‌ی ورزشکار Premium در یک فایل.
-// هر صفحه‌ی قبلی یک تابع بسته (IIFE) شده تا متغیرهایش با بقیه تداخل نکند؛
-// کد هر صفحه همان کد قبلی است، فقط document.getElementById → byId (با پیشوند نما) و
-// document.querySelectorAll → root.querySelectorAll (محدود به همان نما).
 const VIEWS = {};
 
-// ==================== نما: chat ====================
 (function () {
   const root = document.getElementById("view-chat");
   const byId = (id) => document.getElementById("chat-" + id);
 
   root.querySelectorAll(".tab").forEach((tab) => {
     tab.addEventListener("click", () => {
-      root.querySelectorAll(".tab")
+      root
+        .querySelectorAll(".tab")
         .forEach((t) => t.classList.remove("active"));
-      root.querySelectorAll(".panel")
+      root
+        .querySelectorAll(".panel")
         .forEach((p) => p.classList.remove("active"));
       tab.classList.add("active");
       const panel = byId(tab.dataset.target);
@@ -58,10 +55,10 @@ const VIEWS = {};
     });
   });
 
-  root.querySelectorAll(".messages")
+  root
+    .querySelectorAll(".messages")
     .forEach((l) => (l.scrollTop = l.scrollHeight));
 
-  // هنگام نمایش نما، پیام‌ها به آخر اسکرول شوند (وقتی نما پنهان بود اسکرول معنا نداشت)
   VIEWS.chat = {
     onShow() {
       const l = root.querySelector(".panel.active .messages");
@@ -70,7 +67,6 @@ const VIEWS = {};
   };
 })();
 
-// ==================== نما: exercise ====================
 (function () {
   const root = document.getElementById("view-exercise");
   const byId = (id) => document.getElementById("exercise-" + id);
@@ -200,9 +196,7 @@ const VIEWS = {};
     byId("dayCount").textContent = day.rest
       ? "روز استراحت"
       : `${fa(done)} از ${fa(day.list.length)} حرکت`;
-    byId("percent").textContent = day.rest
-      ? "—"
-      : fa(pct) + "٪";
+    byId("percent").textContent = day.rest ? "—" : fa(pct) + "٪";
 
     const C = 2 * Math.PI * 52;
     const ring = byId("ringFill");
@@ -245,8 +239,7 @@ const VIEWS = {};
     byId("programWeek").textContent =
       `هفته‌ی ${fa(PROGRAM.current)} از ${fa(PROGRAM.weeks)}`;
     byId("programBar").style.width = pct + "%";
-    byId("programText").textContent =
-      `${fa(pct)}٪ از دوره طی شده`;
+    byId("programText").textContent = `${fa(pct)}٪ از دوره طی شده`;
     byId("programLeft").textContent =
       `${fa(PROGRAM.weeks - PROGRAM.current)} هفته‌ی دیگر`;
   }
@@ -257,10 +250,8 @@ const VIEWS = {};
     renderProgram();
   }
   render();
-
 })();
 
-// ==================== نما: diet ====================
 (function () {
   const root = document.getElementById("view-diet");
   const byId = (id) => document.getElementById("diet-" + id);
@@ -329,7 +320,7 @@ const VIEWS = {};
     { d: "س", v: 65 },
     { d: "چ", v: 88 },
     { d: "پ", v: 0 },
-    { d: "ج", v: null }, // ج = امروز
+    { d: "ج", v: null },
   ];
   const TODAY = 6;
 
@@ -417,10 +408,8 @@ const VIEWS = {};
 
   renderMeals();
   update();
-
 })();
 
-// ==================== نما: user ====================
 (function () {
   const root = document.getElementById("view-user");
   const byId = (id) => document.getElementById("user-" + id);
@@ -558,21 +547,28 @@ const VIEWS = {};
   renderChart();
   renderMedals();
   fillForm();
-
 })();
 
-// ==================== ناوبری (فوتر) ====================
 const ORDER = ["chat", "exercise", "diet", "user"];
-const TITLES = { chat: "چت", exercise: "برنامه‌ی تمرینی", diet: "رژیم غذایی", user: "پروفایل" };
+const TITLES = {
+  chat: "چت",
+  exercise: "برنامه‌ی تمرینی",
+  diet: "رژیم غذایی",
+  user: "پروفایل",
+};
 const navItems = document.querySelectorAll(".footer [data-view]");
 
 function show(name) {
   if (!ORDER.includes(name)) name = "chat";
-  ORDER.forEach((n) => (document.getElementById("view-" + n).hidden = n !== name));
+  ORDER.forEach(
+    (n) => (document.getElementById("view-" + n).hidden = n !== name),
+  );
   navItems.forEach((item) => {
     const on = item.dataset.view === name;
     item.className = on ? "selected" : "icon";
-    item.querySelector("img").src = on ? item.dataset.activeSrc : item.dataset.src;
+    item.querySelector("img").src = on
+      ? item.dataset.activeSrc
+      : item.dataset.src;
     const a = item.querySelector("a");
     if (on) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");

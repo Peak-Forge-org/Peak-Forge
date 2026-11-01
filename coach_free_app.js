@@ -1,11 +1,10 @@
-// کل برنامه‌ی «مربی بدون Premium» در یک فایل.
-// ابتدا کد مشترک، سپس هر صفحه‌ی قبلی به‌صورت یک تابع بسته (IIFE) تا متغیرهایش با بقیه تداخل نکند.
-// در هر نما: $ و byId به idهای همان نما (با پیشوند) نگاه می‌کنند و document.querySelectorAll → root.querySelectorAll.
 const VIEWS = {};
 
-// ==================== مشترک ====================
-// ابزارها و داده‌ی نمونه‌ی مشترک بین صفحه‌های مربی
-const fa = (n, d = 0) => Number(n).toLocaleString("fa-IR", { maximumFractionDigits: d, minimumFractionDigits: d });
+const fa = (n, d = 0) =>
+  Number(n).toLocaleString("fa-IR", {
+    maximumFractionDigits: d,
+    minimumFractionDigits: d,
+  });
 const $ = (id) => document.getElementById(id);
 function el(tag, cls, text) {
   const e = document.createElement(tag);
@@ -22,26 +21,94 @@ function toast(msg) {
 
 const CATS = ["کاهش وزن", "حجم", "مبتدی"];
 
-// ورزشکاران زیرمجموعه (نمونه) — بعداً از بک‌اند
 const ATHLETES = [
-  { id: 1, name: "سارا محمدی", cat: "حجم", adh: 92, idle: 0, wd: 1.2, sessions: 14, pr: "ددلیفت ۸۵ کیلو", newPr: true },
-  { id: 2, name: "امیر کریمی", cat: "کاهش وزن", adh: 85, idle: 1, wd: -2.4, sessions: 12, pr: "پرس سینه ۷۰ کیلو" },
-  { id: 3, name: "مهدی احمدی", cat: "مبتدی", adh: 48, idle: 5, wd: 0.3, sessions: 5, pr: "اسکوات ۴۰ کیلو" },
-  { id: 4, name: "نگار رستمی", cat: "کاهش وزن", adh: 78, idle: 2, wd: -1.6, sessions: 11, pr: "لانژ ۲۰ کیلو" },
-  { id: 5, name: "پویا صادقی", cat: "حجم", adh: 66, idle: 4, wd: 2.1, sessions: 8, pr: "ددلیفت ۱۱۰ کیلو" },
-  { id: 6, name: "الهام نوری", cat: "مبتدی", adh: 95, idle: 0, wd: -0.8, sessions: 15, pr: "پلانک ۲ دقیقه" },
-  { id: 7, name: "حسین فرجی", cat: "حجم", adh: 71, idle: 3, wd: 1.0, sessions: 9, pr: "پرس سرشانه ۴۵ کیلو" },
+  {
+    id: 1,
+    name: "سارا محمدی",
+    cat: "حجم",
+    adh: 92,
+    idle: 0,
+    wd: 1.2,
+    sessions: 14,
+    pr: "ددلیفت ۸۵ کیلو",
+    newPr: true,
+  },
+  {
+    id: 2,
+    name: "امیر کریمی",
+    cat: "کاهش وزن",
+    adh: 85,
+    idle: 1,
+    wd: -2.4,
+    sessions: 12,
+    pr: "پرس سینه ۷۰ کیلو",
+  },
+  {
+    id: 3,
+    name: "مهدی احمدی",
+    cat: "مبتدی",
+    adh: 48,
+    idle: 5,
+    wd: 0.3,
+    sessions: 5,
+    pr: "اسکوات ۴۰ کیلو",
+  },
+  {
+    id: 4,
+    name: "نگار رستمی",
+    cat: "کاهش وزن",
+    adh: 78,
+    idle: 2,
+    wd: -1.6,
+    sessions: 11,
+    pr: "لانژ ۲۰ کیلو",
+  },
+  {
+    id: 5,
+    name: "پویا صادقی",
+    cat: "حجم",
+    adh: 66,
+    idle: 4,
+    wd: 2.1,
+    sessions: 8,
+    pr: "ددلیفت ۱۱۰ کیلو",
+  },
+  {
+    id: 6,
+    name: "الهام نوری",
+    cat: "مبتدی",
+    adh: 95,
+    idle: 0,
+    wd: -0.8,
+    sessions: 15,
+    pr: "پلانک ۲ دقیقه",
+  },
+  {
+    id: 7,
+    name: "حسین فرجی",
+    cat: "حجم",
+    adh: 71,
+    idle: 3,
+    wd: 1.0,
+    sessions: 9,
+    pr: "پرس سرشانه ۴۵ کیلو",
+  },
 ];
 
-// اشتراک رایگان: سقف ورزشکار (عدد نمونه — با سیاست واقعی محصول جایگزین شود)
 const ATHLETE_LIMIT = 5;
 ATHLETES.splice(ATHLETE_LIMIT);
 
-// اعلان‌های پیشرفته فقط Premium است؛ در نسخه‌ی رایگان همیشه خاموش‌اند
-function getSettings() { return { autoRemind: false, idleDays: 3, weight: false, pr: false, priority: false }; }
+function getSettings() {
+  return {
+    autoRemind: false,
+    idleDays: 3,
+    weight: false,
+    pr: false,
+    priority: false,
+  };
+}
 function saveSettings() {}
 
-// هر عنصری که data-premium داشته باشد قفل است و به‌جای کارکرد عادی یادداشت Premium نشان می‌دهد
 let premiumDlg;
 function premiumNote(feature) {
   if (!premiumDlg) {
@@ -60,8 +127,12 @@ function premiumNote(feature) {
         <a class="pm-buy" href="#">خرید اشتراک Premium</a>
         <button class="pm-close" type="button">بعداً</button>
       </div>`;
-    premiumDlg.querySelector(".pm-close").addEventListener("click", () => premiumDlg.close());
-    premiumDlg.addEventListener("click", (e) => { if (e.target === premiumDlg) premiumDlg.close(); });
+    premiumDlg
+      .querySelector(".pm-close")
+      .addEventListener("click", () => premiumDlg.close());
+    premiumDlg.addEventListener("click", (e) => {
+      if (e.target === premiumDlg) premiumDlg.close();
+    });
     document.body.appendChild(premiumDlg);
   }
   premiumDlg.querySelector(".pm-msg").textContent =
@@ -70,41 +141,96 @@ function premiumNote(feature) {
       : `برای استفاده از «${feature}» باید اشتراک Premium تهیه کنید.`;
   premiumDlg.showModal();
 }
-document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-premium]");
-  if (!t) return;
-  e.preventDefault();
-  e.stopPropagation();
-  premiumNote(t.dataset.premium);
-}, true);
+document.addEventListener(
+  "click",
+  (e) => {
+    const t = e.target.closest("[data-premium]");
+    if (!t) return;
+    e.preventDefault();
+    e.stopPropagation();
+    premiumNote(t.dataset.premium);
+  },
+  true,
+);
 
-// ==================== نما: chat ====================
 (function () {
   const root = document.getElementById("view-chat");
   const byId = (id) => document.getElementById("chat-" + id);
   const $ = (id) => byId(id);
 
-  const nowTime = () => new Date().toLocaleTimeString("fa-IR", { hour: "numeric", minute: "2-digit" });
+  const nowTime = () =>
+    new Date().toLocaleTimeString("fa-IR", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
 
-  // گفت‌وگوها: a = ورزشکار، c = مربی؛ p = اولویت‌دار، done = پاسخ داده شده
-  const convs = ATHLETES.slice(0, 5).map((a) => ({ id: a.id, name: a.name, msgs: [] }));
-  convs[0].msgs = [{ f: "a", t: "سلام مربی، می‌تونم تمرین امروز رو فردا انجام بدم؟", time: "۹:۱۰", p: true }];
-  convs[1].msgs = [{ f: "c", t: "وزنت این هفته عالی بود.", time: "دیروز" }, { f: "a", t: "ممنون! برای شام می‌تونم جایگزین ماهی داشته باشم؟", time: "۸:۴۰", p: true }];
-  convs[2].msgs = [{ f: "a", t: "برنامه‌ی جدید رو دیدم، ممنون.", time: "دیروز" }, { f: "c", t: "خواهش می‌کنم، موفق باشی.", time: "دیروز" }];
-  convs[3].msgs = [{ f: "a", t: "درد خفیفی تو زانو دارم، اسکوات رو ادامه بدم؟", time: "۷:۵۵", p: true }];
-  convs[4].msgs = [{ f: "c", t: "فردا ددلیفت سنگین داری، خوب بخواب.", time: "دیروز" }];
+  const convs = ATHLETES.slice(0, 5).map((a) => ({
+    id: a.id,
+    name: a.name,
+    msgs: [],
+  }));
+  convs[0].msgs = [
+    {
+      f: "a",
+      t: "سلام مربی، می‌تونم تمرین امروز رو فردا انجام بدم؟",
+      time: "۹:۱۰",
+      p: true,
+    },
+  ];
+  convs[1].msgs = [
+    { f: "c", t: "وزنت این هفته عالی بود.", time: "دیروز" },
+    {
+      f: "a",
+      t: "ممنون! برای شام می‌تونم جایگزین ماهی داشته باشم؟",
+      time: "۸:۴۰",
+      p: true,
+    },
+  ];
+  convs[2].msgs = [
+    { f: "a", t: "برنامه‌ی جدید رو دیدم، ممنون.", time: "دیروز" },
+    { f: "c", t: "خواهش می‌کنم، موفق باشی.", time: "دیروز" },
+  ];
+  convs[3].msgs = [
+    {
+      f: "a",
+      t: "درد خفیفی تو زانو دارم، اسکوات رو ادامه بدم؟",
+      time: "۷:۵۵",
+      p: true,
+    },
+  ];
+  convs[4].msgs = [
+    { f: "c", t: "فردا ددلیفت سنگین داری، خوب بخواب.", time: "دیروز" },
+  ];
 
   const forums = [
-    { id: 1, name: "گروه حجم", members: 3, msgs: [
-      { f: "c", t: "یادتون نره وزنه‌ها رو ثبت کنید.", time: "۸:۰۰" },
-      { f: "s", s: "سارا", t: "رکورد جدید ددلیفتم ثبت شد!", time: "۱۰:۳۲" } ] },
-    { id: 2, name: "گروه کاهش وزن", members: 2, msgs: [{ f: "c", t: "این هفته تمرکز روی پایبندی به رژیم باشه.", time: "دیروز" }] },
+    {
+      id: 1,
+      name: "گروه حجم",
+      members: 3,
+      msgs: [
+        { f: "c", t: "یادتون نره وزنه‌ها رو ثبت کنید.", time: "۸:۰۰" },
+        { f: "s", s: "سارا", t: "رکورد جدید ددلیفتم ثبت شد!", time: "۱۰:۳۲" },
+      ],
+    },
+    {
+      id: 2,
+      name: "گروه کاهش وزن",
+      members: 2,
+      msgs: [
+        {
+          f: "c",
+          t: "این هفته تمرکز روی پایبندی به رژیم باشه.",
+          time: "دیروز",
+        },
+      ],
+    },
   ];
 
   let tab = "convs";
-  let open = null; // { kind: "conv" | "forum", id }
-  const pending = () => false; // صندوق اولویت فقط برای مربی Premium
-  const lastText = (x) => (x.msgs.length ? x.msgs[x.msgs.length - 1].t : "هنوز پیامی نیست");
+  let open = null;
+  const pending = () => false;
+  const lastText = (x) =>
+    x.msgs.length ? x.msgs[x.msgs.length - 1].t : "هنوز پیامی نیست";
 
   function updateBadge() {}
 
@@ -115,7 +241,10 @@ document.addEventListener("click", (e) => {
     body.append(el("strong", null, c.name), el("span", null, lastText(c)));
     b.append(el("div", "avatar", c.name[0]), body);
     if (showStar && pending(c)) b.appendChild(el("span", "star", "★"));
-    b.addEventListener("click", () => { open = { kind: "conv", id: c.id }; render(); });
+    b.addEventListener("click", () => {
+      open = { kind: "conv", id: c.id };
+      render();
+    });
     return b;
   }
 
@@ -125,7 +254,8 @@ document.addEventListener("click", (e) => {
     const list = el("div", "list");
     if (tab === "priority") {
       const items = convs.filter(pending);
-      if (!items.length) list.appendChild(el("p", "empty", "پیام اولویت‌دار بی‌پاسخی ندارید."));
+      if (!items.length)
+        list.appendChild(el("p", "empty", "پیام اولویت‌دار بی‌پاسخی ندارید."));
       items.forEach((c) => list.appendChild(convRow(c, true)));
     } else if (tab === "convs") {
       convs.forEach((c) => list.appendChild(convRow(c, true)));
@@ -133,12 +263,17 @@ document.addEventListener("click", (e) => {
       const form = el("form", "card new-forum");
       form.innerHTML = `<div class="form-row"><label class="field">تالار جدید<input required placeholder="نام تالار" /></label><label class="field">اعضا<select></select></label><button class="btn" type="submit">ایجاد</button></div>`;
       const sel = form.querySelector("select");
-      ["همه‌ی ورزشکاران", ...CATS].forEach((c) => sel.appendChild(el("option", null, c)));
+      ["همه‌ی ورزشکاران", ...CATS].forEach((c) =>
+        sel.appendChild(el("option", null, c)),
+      );
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const name = form.querySelector("input").value.trim();
         if (!name) return;
-        const count = sel.value === "همه‌ی ورزشکاران" ? ATHLETES.length : ATHLETES.filter((a) => a.cat === sel.value).length;
+        const count =
+          sel.value === "همه‌ی ورزشکاران"
+            ? ATHLETES.length
+            : ATHLETES.filter((a) => a.cat === sel.value).length;
         forums.push({ id: forums.length + 1, name, members: count, msgs: [] });
         toast("تالار ایجاد شد");
         render();
@@ -148,9 +283,15 @@ document.addEventListener("click", (e) => {
         const b = el("button", "conv");
         b.type = "button";
         const body = el("div", "conv-body");
-        body.append(el("strong", null, f.name), el("span", null, `${fa(f.members)} عضو · ${lastText(f)}`));
+        body.append(
+          el("strong", null, f.name),
+          el("span", null, `${fa(f.members)} عضو · ${lastText(f)}`),
+        );
         b.append(el("div", "avatar", f.name[0]), body);
-        b.addEventListener("click", () => { open = { kind: "forum", id: f.id }; render(); });
+        b.addEventListener("click", () => {
+          open = { kind: "forum", id: f.id };
+          render();
+        });
         list.appendChild(b);
       });
     }
@@ -159,7 +300,8 @@ document.addEventListener("click", (e) => {
 
   function drawMsgs(box, thread, isForum) {
     box.innerHTML = "";
-    if (!thread.msgs.length) box.appendChild(el("p", "empty", "گفت‌وگو را شروع کنید."));
+    if (!thread.msgs.length)
+      box.appendChild(el("p", "empty", "گفت‌وگو را شروع کنید."));
     thread.msgs.forEach((m) => {
       const d = el("div", "msg " + (m.f === "c" ? "out" : "in") + "");
       if (isForum && m.f === "s") d.appendChild(el("span", "sender", m.s));
@@ -178,8 +320,15 @@ document.addEventListener("click", (e) => {
     const peer = el("div", "peer");
     const back = el("button", "icon-btn", "‹ بازگشت");
     back.type = "button";
-    back.addEventListener("click", () => { open = null; render(); });
-    peer.append(back, el("h2", null, thread.name), el("div", "avatar", thread.name[0]));
+    back.addEventListener("click", () => {
+      open = null;
+      render();
+    });
+    peer.append(
+      back,
+      el("h2", null, thread.name),
+      el("div", "avatar", thread.name[0]),
+    );
 
     const box = el("div", "messages");
     const form = el("form", "composer");
@@ -189,7 +338,10 @@ document.addEventListener("click", (e) => {
       const input = form.querySelector("input");
       const t = input.value.trim();
       if (!t) return;
-      if (!isForum) thread.msgs.forEach((m) => { if (m.p) m.done = true; }); // پاسخ مربی = پیام اولویت‌دار پاسخ داده شد
+      if (!isForum)
+        thread.msgs.forEach((m) => {
+          if (m.p) m.done = true;
+        });
       thread.msgs.push({ f: "c", t, time: nowTime() });
       input.value = "";
       drawMsgs(box, thread, isForum);
@@ -208,13 +360,14 @@ document.addEventListener("click", (e) => {
   root.querySelectorAll(".tab").forEach((t) =>
     t.addEventListener("click", () => {
       tab = t.dataset.tab;
-      root.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === t));
+      root
+        .querySelectorAll(".tab")
+        .forEach((x) => x.classList.toggle("active", x === t));
       render();
-    })
+    }),
   );
   render();
 
-  // هنگام نمایش نما، اگر گفت‌وگویی باز است پیام‌ها به آخر اسکرول شوند (وقتی نما پنهان بود اسکرول معنا نداشت)
   VIEWS.chat = {
     onShow() {
       const l = root.querySelector(".messages");
@@ -223,7 +376,6 @@ document.addEventListener("click", (e) => {
   };
 })();
 
-// ==================== نما: athletes ====================
 (function () {
   const root = document.getElementById("view-athletes");
   const byId = (id) => document.getElementById("athletes-" + id);
@@ -236,22 +388,44 @@ document.addEventListener("click", (e) => {
 
   function renderStats() {
     const a = ATHLETES;
-    $("limitNote").textContent = `ظرفیت اشتراک رایگان: ${fa(a.length)} از ${fa(ATHLETE_LIMIT)} ورزشکار`;
+    $("limitNote").textContent =
+      `ظرفیت اشتراک رایگان: ${fa(a.length)} از ${fa(ATHLETE_LIMIT)} ورزشکار`;
     $("sTotal").textContent = fa(a.length);
     $("sActive").textContent = fa(a.filter((x) => x.idle === 0).length);
-    $("sAttn").textContent = fa(a.filter((x) => x.idle >= settings.idleDays).length);
-    $("sAvg").textContent = fa(a.length ? a.reduce((s, x) => s + x.adh, 0) / a.length : 0) + "٪";
+    $("sAttn").textContent = fa(
+      a.filter((x) => x.idle >= settings.idleDays).length,
+    );
+    $("sAvg").textContent =
+      fa(a.length ? a.reduce((s, x) => s + x.adh, 0) / a.length : 0) + "٪";
   }
 
   function buildAlerts() {
     const list = [];
     ATHLETES.forEach((x) => {
       if (x.idle >= settings.idleDays)
-        list.push({ key: x.id + "i", x, title: "بدون ثبت تمرین", text: `${fa(x.idle)} روز است تمرین ثبت نکرده`, remind: true });
+        list.push({
+          key: x.id + "i",
+          x,
+          title: "بدون ثبت تمرین",
+          text: `${fa(x.idle)} روز است تمرین ثبت نکرده`,
+          remind: true,
+        });
       if (settings.weight && Math.abs(x.wd) >= 2)
-        list.push({ key: x.id + "w", x, title: "تغییر مهم وزن", text: `${x.wd > 0 ? "+" : "−"}${fa(Math.abs(x.wd), 1)} کیلوگرم در ماه اخیر`, info: true });
+        list.push({
+          key: x.id + "w",
+          x,
+          title: "تغییر مهم وزن",
+          text: `${x.wd > 0 ? "+" : "−"}${fa(Math.abs(x.wd), 1)} کیلوگرم در ماه اخیر`,
+          info: true,
+        });
       if (settings.pr && x.newPr)
-        list.push({ key: x.id + "p", x, title: "رکورد جدید", text: x.pr, info: true });
+        list.push({
+          key: x.id + "p",
+          x,
+          title: "رکورد جدید",
+          text: x.pr,
+          info: true,
+        });
     });
     return list.filter((a) => !dismissed.has(a.key));
   }
@@ -261,11 +435,15 @@ document.addEventListener("click", (e) => {
     box.innerHTML = "";
     const list = buildAlerts();
     $("alertN").textContent = fa(list.length);
-    if (!list.length) box.appendChild(el("p", "empty", "هشدار جدیدی وجود ندارد."));
+    if (!list.length)
+      box.appendChild(el("p", "empty", "هشدار جدیدی وجود ندارد."));
     list.forEach((a) => {
       const row = el("div", "alert" + (a.info ? " info" : ""));
       const txt = el("div", "alert-text");
-      txt.append(el("strong", null, `${a.x.name} · ${a.title}`), el("span", null, a.text));
+      txt.append(
+        el("strong", null, `${a.x.name} · ${a.title}`),
+        el("span", null, a.text),
+      );
       row.appendChild(txt);
       if (a.remind) {
         const b = el("button", "btn ghost lock-mini", "🔒 یادآوری");
@@ -276,7 +454,10 @@ document.addEventListener("click", (e) => {
       const x = el("button", "icon-btn", "✕");
       x.type = "button";
       x.setAttribute("aria-label", "بستن هشدار");
-      x.addEventListener("click", () => { dismissed.add(a.key); renderAlerts(); });
+      x.addEventListener("click", () => {
+        dismissed.add(a.key);
+        renderAlerts();
+      });
       row.appendChild(x);
       box.appendChild(row);
     });
@@ -288,8 +469,16 @@ document.addEventListener("click", (e) => {
     ["همه", ...CATS].forEach((c) => {
       const b = el("button", "chip" + (c === filter ? " on" : ""), c);
       b.type = "button";
-      if (c === "همه") b.addEventListener("click", () => { filter = c; renderFilters(); renderList(); });
-      else { b.dataset.premium = "دسته‌بندی ورزشکاران"; b.textContent = "🔒 " + c; }
+      if (c === "همه")
+        b.addEventListener("click", () => {
+          filter = c;
+          renderFilters();
+          renderList();
+        });
+      else {
+        b.dataset.premium = "دسته‌بندی ورزشکاران";
+        b.textContent = "🔒 " + c;
+      }
       box.appendChild(b);
     });
   }
@@ -297,13 +486,19 @@ document.addEventListener("click", (e) => {
   function renderList() {
     const box = $("athletes");
     box.innerHTML = "";
-    const list = ATHLETES.filter((x) => filter === "همه" || x.cat === filter).sort((a, b) => b.adh - a.adh);
-    if (!list.length) box.appendChild(el("p", "empty", "ورزشکاری در این دسته نیست."));
+    const list = ATHLETES.filter(
+      (x) => filter === "همه" || x.cat === filter,
+    ).sort((a, b) => b.adh - a.adh);
+    if (!list.length)
+      box.appendChild(el("p", "empty", "ورزشکاری در این دسته نیست."));
     list.forEach((x) => {
       const d = el("details", "ath");
       const s = el("summary");
       const top = el("div", "ath-top");
-      top.append(el("span", "dot" + (x.idle >= settings.idleDays ? " idle" : "")), el("strong", null, x.name));
+      top.append(
+        el("span", "dot" + (x.idle >= settings.idleDays ? " idle" : "")),
+        el("strong", null, x.name),
+      );
       const bar = el("div", "bar");
       const fill = el("i");
       fill.style.width = x.adh + "%";
@@ -312,7 +507,11 @@ document.addEventListener("click", (e) => {
       d.appendChild(s);
 
       const body = el("div", "ath-body");
-      const cell = (label, val) => { const c = el("div"); c.append(el("small", null, label), el("strong", null, val)); return c; };
+      const cell = (label, val) => {
+        const c = el("div");
+        c.append(el("small", null, label), el("strong", null, val));
+        return c;
+      };
       const lk = el("button", "lock-card");
       lk.type = "button";
       lk.dataset.premium = "مشاهده‌ی عملکرد کامل هر ورزشکار";
@@ -320,8 +519,10 @@ document.addEventListener("click", (e) => {
       lk.innerHTML = `<span class="lock-ico">🔒</span><span><strong>عملکرد کامل ورزشکار</strong><small>جلسات، تغییر وزن و رکوردها</small></span><span class="pro">Premium</span>`;
       body.appendChild(lk);
       const go = el("div", "go");
-      const a1 = el("a", "btn ghost", "پیام"); a1.href = "#chat";
-      const a2 = el("a", "btn ghost", "ارسال برنامه"); a2.href = "#programs";
+      const a1 = el("a", "btn ghost", "پیام");
+      a1.href = "#chat";
+      const a2 = el("a", "btn ghost", "ارسال برنامه");
+      a2.href = "#programs";
       go.append(a1, a2);
       body.appendChild(go);
       d.appendChild(body);
@@ -331,18 +532,31 @@ document.addEventListener("click", (e) => {
 
   $("addForm").addEventListener("submit", (e) => {
     e.preventDefault();
-    if (ATHLETES.length >= ATHLETE_LIMIT) return premiumNote("مدیریت تعداد بیشتر ورزشکار");
+    if (ATHLETES.length >= ATHLETE_LIMIT)
+      return premiumNote("مدیریت تعداد بیشتر ورزشکار");
     const name = $("newName").value.trim();
     if (!name) return;
-    ATHLETES.push({ id: Math.max(...ATHLETES.map((a) => a.id)) + 1, name, cat: "—", adh: 0, idle: 0, wd: 0, sessions: 0, pr: "—" });
+    ATHLETES.push({
+      id: Math.max(...ATHLETES.map((a) => a.id)) + 1,
+      name,
+      cat: "—",
+      adh: 0,
+      idle: 0,
+      wd: 0,
+      sessions: 0,
+      pr: "—",
+    });
     $("newName").value = "";
     toast("ورزشکار اضافه شد");
-    renderStats(); renderList();
+    renderStats();
+    renderList();
   });
 
-  renderStats(); renderAlerts(); renderFilters(); renderList();
+  renderStats();
+  renderAlerts();
+  renderFilters();
+  renderList();
 
-  // قبلاً با هر ورود به این صفحه، تنظیمات اعلان دوباره خوانده می‌شد؛ حالا موقع نمایش نما همین کار را می‌کنیم
   VIEWS.athletes = {
     onShow() {
       Object.assign(settings, getSettings());
@@ -354,29 +568,40 @@ document.addEventListener("click", (e) => {
   };
 })();
 
-// ==================== نما: programs ====================
 (function () {
   const root = document.getElementById("view-programs");
   const byId = (id) => document.getElementById("programs-" + id);
   const $ = (id) => byId(id);
 
-  // برنامه‌های تعریف‌شده‌ی مربی (نمونه) — در اشتراک رایگان فقط ارسال به یک ورزشکار ممکن است
   const plans = [
     { id: 1, name: "حجم‌گیری ۴ روزه", type: "تمرینی", weeks: 8, sent: 1 },
-    { id: 2, name: "رژیم ۲۰۰۰ کالری پروتئینی", type: "غذایی", weeks: 4, sent: 1 },
+    {
+      id: 2,
+      name: "رژیم ۲۰۰۰ کالری پروتئینی",
+      type: "غذایی",
+      weeks: 4,
+      sent: 1,
+    },
   ];
   let sendPlan = null;
 
   function renderPlans() {
     const box = $("templates");
     box.innerHTML = "";
-    if (!plans.length) box.appendChild(el("p", "empty", "هنوز برنامه‌ای تعریف نکرده‌اید."));
+    if (!plans.length)
+      box.appendChild(el("p", "empty", "هنوز برنامه‌ای تعریف نکرده‌اید."));
     plans.forEach((p) => {
       const c = el("article", "card tpl");
       const top = el("div", "tpl-top");
-      top.append(el("h3", null, p.name), el("span", "type" + (p.type === "غذایی" ? " food" : ""), p.type));
+      top.append(
+        el("h3", null, p.name),
+        el("span", "type" + (p.type === "غذایی" ? " food" : ""), p.type),
+      );
       const meta = el("div", "tpl-meta");
-      meta.append(el("span", "muted", `${fa(p.weeks)} هفته`), el("span", "muted", `ارسال‌شده به ${fa(p.sent)} ورزشکار`));
+      meta.append(
+        el("span", "muted", `${fa(p.weeks)} هفته`),
+        el("span", "muted", `ارسال‌شده به ${fa(p.sent)} ورزشکار`),
+      );
       const act = el("div", "tpl-actions");
       const send = el("button", "btn", "ارسال به ورزشکار");
       const group = el("button", "lock-mini", "🔒 ارسال گروهی");
@@ -395,7 +620,13 @@ document.addEventListener("click", (e) => {
     e.preventDefault();
     const name = $("tplName").value.trim();
     if (!name) return;
-    plans.push({ id: Date.now(), name, type: $("tplType").value, weeks: +$("tplWeeks").value || 4, sent: 0 });
+    plans.push({
+      id: Date.now(),
+      name,
+      type: $("tplType").value,
+      weeks: +$("tplWeeks").value || 4,
+      sent: 0,
+    });
     $("tplName").value = "";
     renderPlans();
     toast("برنامه ساخته شد");
@@ -409,7 +640,10 @@ document.addEventListener("click", (e) => {
     ATHLETES.forEach((a, i) => {
       const row = el("label", "check-row");
       const r = el("input");
-      r.type = "radio"; r.name = "target"; r.value = a.id; r.checked = i === 0;
+      r.type = "radio";
+      r.name = "target";
+      r.value = a.id;
+      r.checked = i === 0;
       row.append(r, el("span", null, a.name));
       list.appendChild(row);
     });
@@ -427,18 +661,22 @@ document.addEventListener("click", (e) => {
   });
 
   renderPlans();
-
 })();
 
-// ==================== نما: user ====================
 (function () {
   const root = document.getElementById("view-user");
   const byId = (id) => document.getElementById("user-" + id);
   const $ = (id) => byId(id);
 
   const profile = {
-    first: "علی", last: "رضایی", height: 182, weight: 85, city: "تهران", country: "ایران",
-    history: "۱۰ سال مربیگری بدنسازی و تغذیه‌ی ورزشی", years: 10,
+    first: "علی",
+    last: "رضایی",
+    height: 182,
+    weight: 85,
+    city: "تهران",
+    country: "ایران",
+    history: "۱۰ سال مربیگری بدنسازی و تغذیه‌ی ورزشی",
+    years: 10,
   };
   const medals = [
     { t: "مربی برتر استان تهران", s: "فدراسیون بدنسازی · ۱۴۰۳" },
@@ -471,14 +709,22 @@ document.addEventListener("click", (e) => {
     });
   }
 
-  /* ویرایش پروفایل */
-  const form = $("profileForm"), editBtn = $("editBtn");
+  const form = $("profileForm"),
+    editBtn = $("editBtn");
   let editing = false;
-  const fillForm = () => Object.keys(profile).forEach((k) => { if (form.elements[k]) form.elements[k].value = profile[k]; });
+  const fillForm = () =>
+    Object.keys(profile).forEach((k) => {
+      if (form.elements[k]) form.elements[k].value = profile[k];
+    });
   editBtn.addEventListener("click", () => {
     if (editing) {
-      ["first", "last", "city", "country", "history"].forEach((k) => (profile[k] = form.elements[k].value.trim() || profile[k]));
-      ["height", "weight"].forEach((k) => { const v = parseFloat(form.elements[k].value); if (v > 0) profile[k] = v; });
+      ["first", "last", "city", "country", "history"].forEach(
+        (k) => (profile[k] = form.elements[k].value.trim() || profile[k]),
+      );
+      ["height", "weight"].forEach((k) => {
+        const v = parseFloat(form.elements[k].value);
+        if (v > 0) profile[k] = v;
+      });
       renderProfile();
     }
     editing = !editing;
@@ -488,34 +734,48 @@ document.addEventListener("click", (e) => {
     if (!editing) fillForm();
   });
 
-  /* فروشگاه */
   function renderStore() {
     $("storeName").textContent = store.name;
     const box = $("products");
     box.innerHTML = "";
-    if (!store.products.length) box.appendChild(el("p", "empty", "هنوز محصولی ثبت نشده."));
+    if (!store.products.length)
+      box.appendChild(el("p", "empty", "هنوز محصولی ثبت نشده."));
     store.products.forEach((p) => {
       const row = el("div", "product");
-      row.append(el("strong", null, p.name), el("span", "price", fa(p.price) + " تومان"));
+      row.append(
+        el("strong", null, p.name),
+        el("span", "price", fa(p.price) + " تومان"),
+      );
       const x = el("button", "icon-btn", "✕");
-      x.type = "button"; x.setAttribute("aria-label", "حذف محصول");
-      x.addEventListener("click", () => { store.products.splice(store.products.indexOf(p), 1); renderStore(); renderProfile(); });
+      x.type = "button";
+      x.setAttribute("aria-label", "حذف محصول");
+      x.addEventListener("click", () => {
+        store.products.splice(store.products.indexOf(p), 1);
+        renderStore();
+        renderProfile();
+      });
       row.appendChild(x);
       box.appendChild(row);
     });
   }
   $("prodForm").addEventListener("submit", (e) => {
     e.preventDefault();
-    const name = $("pName").value.trim(), price = +$("pPrice").value;
+    const name = $("pName").value.trim(),
+      price = +$("pPrice").value;
     if (!name || price < 0) return;
     store.products.push({ name, price });
-    $("pName").value = ""; $("pPrice").value = "";
-    renderStore(); renderProfile(); toast("محصول ثبت شد");
+    $("pName").value = "";
+    $("pPrice").value = "";
+    renderStore();
+    renderProfile();
+    toast("محصول ثبت شد");
   });
 
-  renderProfile(); renderMedals(); fillForm(); renderStore();
+  renderProfile();
+  renderMedals();
+  fillForm();
+  renderStore();
 
-  // تعداد ورزشکاران و محصولات (آمار بالای صفحه) موقع نمایش نما به‌روز شود
   VIEWS.user = {
     onShow() {
       renderProfile();
@@ -523,19 +783,27 @@ document.addEventListener("click", (e) => {
   };
 })();
 
-// ==================== ناوبری (فوتر) ====================
-const ORDER = ['chat', 'athletes', 'programs', 'user'];
-const TITLES = {'chat': 'چت', 'athletes': 'ورزشکاران من', 'programs': 'مدیریت برنامه\u200cها', 'user': 'پروفایل مربی'};
+const ORDER = ["chat", "athletes", "programs", "user"];
+const TITLES = {
+  chat: "چت",
+  athletes: "ورزشکاران من",
+  programs: "مدیریت برنامه\u200cها",
+  user: "پروفایل مربی",
+};
 const DEFAULT_VIEW = "athletes";
 const navItems = document.querySelectorAll(".footer [data-view]");
 
 function show(name) {
   if (!ORDER.includes(name)) name = DEFAULT_VIEW;
-  ORDER.forEach((n) => (document.getElementById("view-" + n).hidden = n !== name));
+  ORDER.forEach(
+    (n) => (document.getElementById("view-" + n).hidden = n !== name),
+  );
   navItems.forEach((item) => {
     const on = item.dataset.view === name;
     item.className = on ? "selected" : "icon";
-    item.querySelector("img").src = on ? item.dataset.activeSrc : item.dataset.src;
+    item.querySelector("img").src = on
+      ? item.dataset.activeSrc
+      : item.dataset.src;
     const a = item.querySelector("a");
     if (on) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
@@ -544,7 +812,6 @@ function show(name) {
   window.scrollTo(0, 0);
   if (VIEWS[name] && VIEWS[name].onShow) VIEWS[name].onShow();
 }
-// لینک «تنظیم اعلان‌ها» (#settings) = صفحه‌ی پروفایل و اسکرول به بخش تنظیمات
 function route() {
   const h = location.hash.slice(1);
   if (h === "settings") {

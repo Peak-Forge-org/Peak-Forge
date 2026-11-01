@@ -163,7 +163,6 @@ form.addEventListener("submit", (e) => {
       .map((s) => s.trim())
       .filter(Boolean),
   };
-  // TODO: POST /api/register با data → ارسال ایمیل تأیید
   try {
     localStorage.setItem("role", data.role);
   } catch {}

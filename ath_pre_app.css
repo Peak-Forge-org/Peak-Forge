@@ -1,8 +1,3 @@
-/* ایده: هر صفحه یک نما (view) است؛ استایل هر نما با #view-نام محدود شده تا با بقیه تداخل نکند */
-
-
-/* ===== مشترک: متغیرها، بدنه و فوتر ===== */
-
 :root {
   --red: #f97316;
   --black: #181818;
@@ -92,13 +87,9 @@ body {
   display: none !important;
 }
 
-/* آیکنِ انتخاب‌شده در نسخه‌ی قبلی لینک نداشت؛ با display: contents همان چیدمان حفظ می‌شود */
 .selected a {
   display: contents;
 }
-
-
-/* ===== نما: chat ===== */
 
 #view-chat {
   display: flex;
@@ -320,9 +311,6 @@ body {
   background: var(--white);
   color: var(--red);
 }
-
-
-/* ===== نما: exercise ===== */
 
 #view-exercise {
   max-width: 40rem;
@@ -643,7 +631,6 @@ body {
   }
 }
 
-
 /* ===== نما: diet ===== */
 
 #view-diet {
@@ -956,9 +943,6 @@ body {
     width: 100%;
   }
 }
-
-
-/* ===== نما: user ===== */
 
 #view-user {
   max-width: 40rem;
