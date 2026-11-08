@@ -41,10 +41,11 @@ dialog whose "خرید اشتراک" action flips the account tier (simulated pa
 
 ```
 Peak-Forge/
-├── *.html                  # صفحه‌ها در ریشه (ath_* = ورزشکار، coach_* = مربی،
-│                           #  *_free_* = پلن رایگان، *_pre_* = پرمیوم)
-├── css/                    # همه‌ی استایل‌ها (یک فایل برای هر صفحه + base/common)
-├── js/                     # همه‌ی اسکریپت‌ها (api.js مشترک، *_common.js کمک‌کار نقش‌ها)
+├── auth.html               # ورود، ثبت‌نام و بازیابی رمز عبور
+├── athlete/                # صفحه‌های یکپارچه‌ی ورزشکار (exercise, diet, chat, profile)
+├── coach/                  # صفحه‌های یکپارچه‌ی مربی (athletes, programs, chat, profile)
+├── css/                    # استایل‌ها (athlete-*.css، coach-*.css، auth.css)
+├── js/                     # اسکریپت‌ها (api.js، auth.js، athlete-*.js، coach-*.js)
 ├── icons/                  # آیکون‌های ناوبری
 ├── docs/                   # user stories، قرارداد API، نمودارهای طراحی، پروتوتایپ
 └── backend/
@@ -77,7 +78,7 @@ auto-populated when a program/diet is assigned) · `programs` → `exercises` ·
 `exercise_logs` / `meal_logs` (daily ticks, XP-award flags) · `exercise_sets`
 (per-set weight/reps) · `weight_logs` (weight + body fat) · `personal_records` ·
 `messages` (DMs + forum posts, priority/read/answered) · `forums` ·
-`athlete_game` (XP).
+`athlete_game` (XP) · `coach_settings` · `coach_schedule` · `coach_honors`.
 
 ### How adherence is measured
 
@@ -99,18 +100,19 @@ record, 100 ticks) are computed on demand.
 ### Free tier
 - Auth (signup/login), athlete & coach profiles
 - Programs: create workout programs + exercises, diet plans + meals, assign to athletes
-- Daily tick lists for exercises & meals, per-set training details
+- Daily tick lists for exercises & meals
 - Direct chat + group forums with the linked coach/athletes
 - Coach dashboard: linked athletes, adherence bars, inactivity alerts, add-by-email
 
 ### Premium (athlete)
-- Weight & body-fat trend charts, personal records, printable progress report
+- Weight & body-fat trend charts, personal records, printable progress report, per-set training details
 - Calorie & food-alternative display per meal, weekly adherence chart
 - Priority messages to the coach, XP/level/coins/rank/badges panel
 
 ### Premium (coach)
 - Unlimited athletes, category tags + filters, per-athlete detail (trend chart,
-  records, assigned plans), priority inbox, bulk send, program/diet copy & rename
+  records, assigned plans), priority inbox, bulk send, program/diet copy & rename,
+  weekly schedule calendar, server-persisted settings & honors
 
 ## Documentation
 
@@ -132,8 +134,7 @@ node test-coach.js   # 24 assertions: linking, adherence math, caps, detail endp
 ## Known Limitations / Next Steps
 
 - Payment is simulated (no gateway); the coach storefront is a local demo.
-- Weekly coach calendar and notification settings persist in `localStorage`.
-- Notifications/reminders are not yet automated server-side.
+- Automated background cron reminders are not yet scheduled server-side (manual and on-demand reminders send real chat messages).
 
 ## Project Status
 

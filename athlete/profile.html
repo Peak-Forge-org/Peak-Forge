@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پروفایل</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/athlete-profile.css" />
+    <link rel="stylesheet" href="/css/athlete-common.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card head">
+        <div class="avatar" id="avatar"></div>
+        <div class="head-info">
+          <h1 id="fullName"></h1>
+          <p class="muted" id="place"></p>
+          <p class="muted" id="coachName">مربی: —</p>
+        </div>
+        <span class="tag" id="tierTag" hidden>Premium</span>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <strong id="sHeight"></strong><span>قد (سانتی‌متر)</span>
+        </div>
+        <div class="stat">
+          <strong id="sWeight"></strong><span>وزن (کیلوگرم)</span>
+        </div>
+        <div class="stat"><strong id="sBmi"></strong><span>BMI</span></div>
+        <div class="stat">
+          <strong id="sYears"></strong><span>سال سابقه</span>
+        </div>
+      </section>
+
+      <!-- premium-only sections: hidden by default, shown for premium users -->
+      <section class="card" id="gameCard" hidden>
+        <div class="row-head">
+          <h2>سطح <span id="level"></span></h2>
+          <span class="muted" id="xpText"></span>
+        </div>
+        <div class="bar"><i id="xpBar"></i></div>
+        <div class="mini-stats">
+          <div><strong id="streak"></strong><span>روز استمرار</span></div>
+          <div><strong id="coins"></strong><span>سکه</span></div>
+          <div><strong id="rank"></strong><span>رتبه در جدول</span></div>
+        </div>
+        <div class="badges" id="badges"></div>
+      </section>
+
+      <section class="card" id="chartCard" hidden>
+        <div class="row-head">
+          <h2>روند وزن</h2>
+          <span class="muted" id="weightDelta"></span>
+        </div>
+        <svg
+          class="chart"
+          id="chart"
+          viewBox="0 0 320 140"
+          role="img"
+          aria-label="نمودار وزن"
+        ></svg>
+      </section>
+
+      <section class="card" id="fatCard" hidden>
+        <div class="row-head">
+          <h2>روند چربی بدن</h2>
+          <span class="muted" id="fatDelta"></span>
+        </div>
+        <svg
+          class="chart"
+          id="fatChart"
+          viewBox="0 0 320 140"
+          role="img"
+          aria-label="نمودار چربی بدن"
+        ></svg>
+      </section>
+
+      <section class="card" id="reportCard" hidden>
+        <div class="row-head">
+          <h2>گزارش پیشرفت</h2>
+          <button type="button" class="btn-ghost" id="reportBtn">📄 دریافت گزارش</button>
+        </div>
+        <div class="mini-stats" id="reportStats"></div>
+      </section>
+
+      <section class="card" id="recordsCard" hidden>
+        <div class="row-head"><h2>رکوردهای شخصی</h2></div>
+        <ul class="medals" id="records"></ul>
+        <form class="rec-form" id="recordForm">
+          <label>حرکت<input id="recName" required placeholder="مثلاً ددلیفت" /></label>
+          <label>وزن (کیلوگرم)<input id="recWeight" type="number" step="0.5" min="1" required /></label>
+          <button type="submit" class="btn-ghost">ثبت رکورد</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>مدال‌ها و افتخارات</h2>
+        <ul class="medals" id="medals"></ul>
+      </section>
+
+      <button
+        type="button"
+        class="lock-card"
+        id="upgradeTeaser"
+        data-premium="تحلیل پیشرفته، نمودار وزن و چربی، رکوردها و گزارش"
+      >
+        <span class="lock-ico">🔒</span>
+        <span
+          ><strong>تحلیل پیشرفته، نمودارها و رکوردها</strong
+          ><small>روند وزن و چربی، گزارش پیشرفت و ثبت رکورد شخصی</small></span
+        >
+        <span class="pro">Premium</span>
+      </button>
+
+      <form class="card" id="profileForm">
+        <div class="row-head">
+          <h2>اطلاعات شخصی</h2>
+          <button type="button" class="btn" id="editBtn">ویرایش</button>
+        </div>
+        <div class="fields">
+          <label>نام <input name="first" disabled /></label>
+          <label>نام خانوادگی <input name="last" disabled /></label>
+          <label
+            >قد (سانتی‌متر)
+            <input name="height" type="number" min="100" max="250" disabled
+          /></label>
+          <label
+            >وزن (کیلوگرم)
+            <input
+              name="weight"
+              type="number"
+              min="30"
+              max="250"
+              step="0.1"
+              disabled
+          /></label>
+          <label>شهر <input name="city" disabled /></label>
+          <label>کشور <input name="country" disabled /></label>
+          <label class="wide"
+            >سابقه‌ی ورزشی <input name="history" disabled
+          /></label>
+        </div>
+      </form>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="/athlete/chat.html">
+          <img src="/icons/comments (1).png" alt="چت" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="/athlete/exercise.html">
+          <img src="/icons/dumbbell-ray.png" alt="تمرین" />
+        </a>
+      </div>
+
+      <div class="icon">
+        <a href="/athlete/diet.html">
+          <img src="/icons/hamburger-soda.png" alt="تغذیه" />
+        </a>
+      </div>
+
+      <div class="selected">
+        <img src="/icons/user.svg" alt="پروفایل" />
+      </div>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/athlete-common.js"></script>
+    <script src="/js/athlete-profile.js"></script>
+  </body>
+</html>

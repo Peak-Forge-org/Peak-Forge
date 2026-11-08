@@ -1,8 +1,8 @@
 const $ = (id) => document.getElementById(id);
 
 const HOME = {
-  athlete: "./ath_free_chat.html",
-  coach: "./coach_free_athletes.html",
+  athlete: "/athlete/exercise.html",
+  coach: "/coach/athletes.html",
 };
 
 const normDigits = (s) =>

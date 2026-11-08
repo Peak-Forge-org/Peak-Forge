@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چت</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/coach-base.css" />
+    <link rel="stylesheet" href="/css/coach-chat.css" />
+  </head>
+  <body>
+    <main class="chat-page">
+      <div class="tabs" id="tabs" role="tablist">
+        <button
+          class="tab"
+          data-tab="priority"
+          data-premium="صندوق پیام‌های اولویت‌دار"
+          role="tab"
+        >
+          🔒 اولویت‌دار<span class="badge" id="prioN" hidden></span>
+        </button>
+        <button class="tab active" data-tab="convs" role="tab">
+          گفت‌وگوها
+        </button>
+        <button class="tab" data-tab="forums" role="tab">تالارها</button>
+      </div>
+      <section id="view"></section>
+    </main>
+
+    <div class="footer">
+      <div class="icon">
+        <a href="/coach/chat.html"
+          ><img src="/icons/comments (1).svg" alt="چت"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="/coach/athletes.html"
+          ><img src="/icons/users.svg" alt="ورزشکاران"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="/coach/programs.html"
+          ><img src="/icons/dumbbell-ray.png" alt="برنامه‌ها"
+        /></a>
+      </div>
+      <div class="icon">
+        <a href="/coach/profile.html"
+          ><img src="/icons/user.png" alt="پروفایل"
+        /></a>
+      </div>
+    </div>
+    <script src="/js/api.js"></script>
+    <script src="/js/coach-common.js"></script>
+    <script src="/js/coach-chat.js"></script>
+  </body>
+</html>
