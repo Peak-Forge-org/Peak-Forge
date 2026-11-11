@@ -1,8 +1,8 @@
 const $ = (id) => document.getElementById(id);
 
 const HOME = {
-  athlete: "./ath_free_chat.html",
-  coach: "./coach_free_athletes.html",
+  athlete: "/athlete/exercise.html",
+  coach: "/coach/athletes.html",
 };
 
 const normDigits = (s) =>
@@ -83,25 +83,116 @@ const toast = (msg) => {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 2200);
 };
+// ── Forgot password (simulated email: the code is shown in the dialog) ───────
+let forgotEmail = "";
+
 $("forgot").addEventListener("click", (e) => {
   e.preventDefault();
-  toast("لینک بازیابی رمز به ایمیل شما ارسال می‌شود (نیازمند بک‌اند)");
+  $("forgotForm").querySelectorAll("[data-step]").forEach((d) => {
+    d.hidden = d.dataset.step !== "1";
+  });
+  $("forgotDlg").showModal();
+});
+$("forgotClose").addEventListener("click", () => $("forgotDlg").close());
+
+$("forgotForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const step1Visible = !$("forgotForm").querySelector('[data-step="1"]').hidden;
+
+  // step 1: request the reset code
+  if (step1Visible) {
+    const email = $("fgEmail").value.trim();
+    if (!email) return;
+    const res = await fetch("/api/auth/forgot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      toast(data.error || "خطا در ارسال کد");
+      return;
+    }
+    forgotEmail = email;
+    if (data.reset_code) {
+      $("fgCodeNote").textContent =
+        `کد بازیابی (شبیه‌سازی ایمیل): ${data.reset_code} — تا ۱۰ دقیقه معتبر است.`;
+    } else {
+      $("fgCodeNote").textContent =
+        "اگر ایمیل در سیستم ثبت شده باشد کد صادر شده است.";
+    }
+    $("forgotForm").querySelector('[data-step="1"]').hidden = true;
+    $("forgotForm").querySelector('[data-step="2"]').hidden = false;
+    $("fgCode").focus();
+    return;
+  }
+
+  // step 2: verify the code and set the new password
+  const code = $("fgCode").value.trim();
+  const newPass = $("fgPass").value;
+  if (!code || !newPass) return;
+  const res = await fetch("/api/auth/reset", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: forgotEmail, code, new_password: newPass }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    toast(data.error || "خطا در تغییر رمز");
+    return;
+  }
+  $("forgotForm").querySelector('[data-step="2"]').hidden = true;
+  $("forgotForm").querySelector('[data-step="3"]').hidden = false;
+});
+
+$("fgDone").addEventListener("click", () => {
+  $("forgotDlg").close();
+  $("fgEmail").value = "";
+  $("fgCode").value = "";
+  $("fgPass").value = "";
 });
 
 const loginForm = $("loginForm");
-loginForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const ok = validate(loginForm, loginForm, {
     email: rules.email,
     password: (v) => v !== "" || "رمز عبور را وارد کنید.",
   });
   if (!ok) return;
-  let role = "athlete";
+
+  const email = loginForm.elements.email.value.trim();
+  const password = loginForm.elements.password.value;
+  const submitBtn = loginForm.querySelector("button[type='submit']");
+  if (submitBtn) submitBtn.disabled = true;
+
   try {
-    role = localStorage.getItem("role") || "athlete";
-  } catch {}
-  toast("ورود موفق");
-  setTimeout(() => (location.href = HOME[role]), 600);
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      toast(data.error || "خطا در ورود به حساب.");
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("role", data.user.role);
+
+    toast("ورود موفقیت‌آمیز بود");
+    setTimeout(() => {
+      location.href = HOME[data.user.role] || HOME.athlete;
+    }, 600);
+  } catch (err) {
+    console.error(err);
+    toast("خطا در برقراری ارتباط با سرور");
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
 });
 
 const form = $("signupForm");
@@ -140,7 +231,7 @@ form
     r.addEventListener("change", () => ($("roleErr").textContent = "")),
   );
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!stepValid(step)) return;
   if (step < 3) return showStep(step + 1);
@@ -163,15 +254,38 @@ form.addEventListener("submit", (e) => {
       .map((s) => s.trim())
       .filter(Boolean),
   };
-  try {
-    localStorage.setItem("role", data.role);
-  } catch {}
 
-  form.hidden = true;
-  $("steps").hidden = true;
-  $("done").hidden = false;
-  $("doneTitle").textContent = `${data.first} عزیز، خوش آمدید`;
-  $("doneLink").href = HOME[data.role];
+  const nextBtn = $("nextBtn");
+  if (nextBtn) nextBtn.disabled = true;
+
+  try {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const resp = await res.json();
+    if (!res.ok) {
+      toast(resp.error || "خطا در ثبت‌نام.");
+      return;
+    }
+
+    localStorage.setItem("token", resp.token);
+    localStorage.setItem("user", JSON.stringify(resp.user));
+    localStorage.setItem("role", data.role);
+
+    form.hidden = true;
+    $("steps").hidden = true;
+    $("done").hidden = false;
+    $("doneTitle").textContent = `${data.first} عزیز، خوش آمدید`;
+    $("doneLink").href = HOME[data.role];
+  } catch (err) {
+    console.error(err);
+    toast("خطا در برقراری ارتباط با سرور");
+  } finally {
+    if (nextBtn) nextBtn.disabled = false;
+  }
 });
 
 form.elements.password.addEventListener("input", (e) => {
