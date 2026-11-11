@@ -1,3 +1,8 @@
+/* ایده: هر صفحه یک نما (view) است؛ استایل هر نما با #view-نام محدود شده تا با بقیه تداخل نکند */
+
+
+/* ===== مشترک: متغیرها، بدنه و فوتر ===== */
+
 :root {
   --red: #f97316;
   --black: #181818;
@@ -87,9 +92,13 @@ body {
   display: none !important;
 }
 
+/* آیکنِ انتخاب‌شده در نسخه‌ی قبلی لینک نداشت؛ با display: contents همان چیدمان حفظ می‌شود */
 .selected a {
   display: contents;
 }
+
+
+/* ===== نما: chat ===== */
 
 #view-chat {
   display: flex;
@@ -311,6 +320,9 @@ body {
   background: var(--white);
   color: var(--red);
 }
+
+
+/* ===== نما: exercise ===== */
 
 #view-exercise {
   max-width: 40rem;
@@ -631,6 +643,7 @@ body {
   }
 }
 
+
 /* ===== نما: diet ===== */
 
 #view-diet {
@@ -943,6 +956,9 @@ body {
     width: 100%;
   }
 }
+
+
+/* ===== نما: user ===== */
 
 #view-user {
   max-width: 40rem;
@@ -1288,3 +1304,115 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== ماژول مشترک: جست‌وجو، پروفایل، اعضای تالار، فروشگاه، سبد خرید (کلاس‌ها با پیشوند sx-) ===== */
+.sx-lock { overflow: hidden; }
+.sx-sheet[hidden], .sx-fab[hidden], .sx-count[hidden] { display: none !important; }
+.sx-sheet { position: fixed; inset: 0; z-index: 15; background: var(--black); color: var(--white); display: flex; flex-direction: column; font-family: "Vazirmatn", Tahoma, sans-serif; }
+.sx-bar { display: flex; align-items: center; gap: 0.6rem; width: 100%; max-width: 40rem; margin: 0 auto; padding: 0.7rem 1rem; }
+.sx-back { font: inherit; font-size: 0.85rem; border: 0; background: var(--surface); color: var(--white); padding: 0.45rem 0.9rem; border-radius: 0.8rem; cursor: pointer; white-space: nowrap; }
+.sx-title { flex: 1; margin: 0; font-size: 1.05rem; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sx-cartbtn { position: relative; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 0.8rem; background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--white); }
+.sx-body { flex: 1; overflow-y: auto; width: 100%; max-width: 40rem; margin: 0 auto; padding: 0 1rem 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.sx-ic { width: 1.3rem; height: 1.3rem; object-fit: contain; display: block; }
+.sx-count { position: absolute; top: -0.35rem; inset-inline-end: -0.35rem; min-width: 1.2rem; height: 1.2rem; padding: 0 0.3rem; border-radius: 1rem; background: var(--red); color: var(--black); font-size: 0.7rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.btn .sx-count, .sx-row .sx-count { position: static; display: inline-flex; margin-inline-start: 0.4rem; }
+.sx-fab { position: fixed; z-index: 12; bottom: 5.6rem; inset-inline-start: 1rem; width: 3rem; height: 3rem; border: 0; border-radius: 1rem; background: var(--red); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5); }
+.sx-fab .sx-count { background: var(--white); }
+
+.sx-hero { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 0.5rem 0 0.2rem; text-align: center; }
+.sx-av { width: 2.75rem; height: 2.75rem; border-radius: 1rem; background: var(--red); color: var(--black); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+.sx-av.coach, .sx-av.group { background: var(--white); }
+.sx-av.ok { background: var(--red); }
+.sx-av img { width: 100%; height: 100%; object-fit: cover; }
+.sx-av.big { width: 6rem; height: 6rem; border-radius: 2rem; font-size: 2.4rem; }
+.sx-name { margin: 0; font-size: 1.3rem; }
+.sx-sub { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.sx-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+.sx-chips.row { justify-content: flex-start; }
+.sx-chip { font-size: 0.7rem; font-weight: 600; padding: 0.1rem 0.6rem; border-radius: 1rem; background: var(--surface); color: var(--white); white-space: nowrap; }
+.sx-chip.coach { background: var(--white); color: var(--black); }
+.sx-chip.you { background: var(--red); color: var(--black); }
+
+.sx-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.sx-btn { font: inherit; font-size: 0.9rem; font-weight: 600; border: 0; border-radius: 0.9rem; padding: 0.65rem 1.1rem; background: var(--surface); color: var(--white); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; flex: 1; }
+.sx-btn.primary { background: var(--red); color: var(--black); }
+.sx-btn.wide { width: 100%; flex: none; }
+.sx-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.sx-stat { background: var(--surface); border-radius: 1rem; padding: 0.7rem 0.3rem; text-align: center; display: flex; flex-direction: column; gap: 0.2rem; }
+.sx-stat strong { font-size: 1.15rem; color: var(--red); }
+.sx-stat span { font-size: 0.62rem; color: var(--muted); }
+.sx-card { background: var(--surface); border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.sx-card h3 { margin: 0; font-size: 0.95rem; }
+.sx-kv { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.85rem; }
+.sx-kv span { color: var(--muted); white-space: nowrap; }
+.sx-kv strong { font-weight: 600; text-align: end; }
+.sx-medals { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.sx-medals li { display: flex; flex-direction: column; padding: 0.6rem 0.8rem; background: var(--black); border-radius: 0.8rem; border-inline-start: 4px solid var(--red); }
+.sx-medals small { color: var(--muted); font-size: 0.75rem; }
+.sx-empty { margin: 0; color: var(--muted); font-size: 0.85rem; padding: 0.9rem; background: var(--surface); border-radius: 1rem; text-align: center; }
+.sx-empty.big { padding: 2.5rem 1rem; }
+.sx-note { margin: 0; color: var(--muted); font-size: 0.78rem; line-height: 1.8; }
+
+.sx-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.sx-row { display: flex; align-items: center; gap: 0.75rem; background: var(--surface); border-radius: 1rem; padding: 0.7rem; cursor: pointer; border: 2px solid transparent; }
+.sx-row:hover { border-color: var(--muted); }
+.sx-rowbody { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sx-rowbody strong { font-size: 0.95rem; }
+.sx-rowbody span { color: var(--muted); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sx-tags { display: flex; flex-direction: column; gap: 0.25rem; align-items: flex-end; }
+.sx-iconbtn { border: 0; background: var(--black); border-radius: 0.8rem; width: 2.4rem; height: 2.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.7rem; flex-shrink: 0; }
+
+.sx-search { display: flex; flex-direction: column; gap: 0.7rem; }
+.sx-input { display: flex; align-items: center; gap: 0.6rem; background: var(--surface); border-radius: 1rem; padding: 0.2rem 0.9rem; border: 2px solid transparent; }
+.sx-input:focus-within { border-color: var(--red); }
+.sx-input input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--white); font: inherit; padding: 0.6rem 0; outline: none; }
+.sx-input input::placeholder { color: var(--muted); }
+.sx-results { display: flex; flex-direction: column; gap: 0.5rem; }
+.sx-fchip { font: inherit; font-size: 0.78rem; border: 0; padding: 0.3rem 0.9rem; border-radius: 1rem; background: var(--surface); color: var(--muted); cursor: pointer; }
+.sx-fchip.on { background: var(--red); color: var(--black); font-weight: 600; }
+
+.sx-prod, .sx-line { display: flex; align-items: center; gap: 0.7rem; background: var(--surface); border-radius: 1rem; padding: 0.8rem; }
+.sx-card .sx-line { background: var(--black); padding: 0.6rem 0.7rem; }
+.sx-prod .sx-btn { flex: none; padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+.sx-price { color: var(--red) !important; font-weight: 600; }
+.sx-step { display: inline-flex; align-items: center; gap: 0.2rem; background: var(--black); border-radius: 0.8rem; padding: 0.15rem; flex-shrink: 0; }
+.sx-card .sx-step { background: var(--surface); }
+.sx-step button { width: 2rem; height: 2rem; border: 0; border-radius: 0.6rem; background: var(--surface); color: var(--white); font: inherit; font-size: 1.1rem; cursor: pointer; }
+.sx-card .sx-step button { background: var(--black); }
+.sx-step span { min-width: 1.6rem; text-align: center; font-weight: 600; }
+.sx-x { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 1rem; padding: 0.3rem; }
+.sx-total { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1rem; border-radius: 1rem; background: var(--white); color: var(--black); font-weight: 600; }
+.sx-total strong { font-size: 1.1rem; }
+
+.sx-toast { position: fixed; bottom: 6.5rem; left: 50%; transform: translateX(-50%); z-index: 40; background: var(--white); color: var(--black); padding: 0.5rem 1.2rem; border-radius: 1rem; font-size: 0.85rem; font-weight: 600; }
+.sx-back:focus-visible, .sx-cartbtn:focus-visible, .sx-btn:focus-visible, .sx-row:focus-visible, .sx-fab:focus-visible, .sx-fchip:focus-visible, .sx-step button:focus-visible, .sx-x:focus-visible, .sx-iconbtn:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+@media (max-width: 440px) { .sx-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===== افزوده‌های هر نما (چت، پنل ورزشکاران، پروفایل) ===== */
+#view-chat .peer[data-profile], #view-chat .peer[data-members] { cursor: pointer; }
+#view-chat .peer-go { margin-inline-start: auto; color: var(--muted); font-size: 1.3rem; line-height: 1; }
+#view-chat .peer-back { font: inherit; font-size: 0.8rem; border: 0; background: var(--black); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 0.7rem; cursor: pointer; white-space: nowrap; }
+#view-chat .sx-host { flex: 1; min-height: 0; overflow-y: auto; }
+#view-chat .peer-back:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+#view-athletes .msg-btn { margin-inline-start: auto; padding: 0.2rem 0.4rem; border-radius: 0.6rem; }
+#view-athletes .msg-btn:hover { background: var(--surface); }
+#view-athletes .msg-btn .sx-ic { width: 1.35rem; height: 1.35rem; }
+#view-user .link-btn { font: inherit; border: 0; background: none; padding: 0; color: var(--red); cursor: pointer; text-decoration: underline; }
+#view-user .store-btn { align-self: flex-end; margin-inline-start: auto; border: 0; border-radius: 0.9rem; background: var(--black); padding: 0.5rem 0.7rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--white); font: inherit; font-size: 0.75rem; }
+#view-user .store-btn:hover { background: var(--black); outline: 1px solid var(--muted); }
+#view-user .medals-head { margin-bottom: 0; }
+#view-user .medals li.m-edit { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem; align-items: center; }
+#view-user .medals li.m-edit input { font: inherit; font-size: 0.9rem; color: var(--white); background: var(--surface); border: 2px solid var(--muted); border-radius: 0.6rem; padding: 0.4rem 0.6rem; width: 100%; grid-column: 1; }
+#view-user .medals li.m-edit input:focus-visible { outline: none; border-color: var(--red); }
+#view-user .medals li.m-edit .m-del { grid-column: 2; grid-row: 1 / span 2; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0.3rem 0.5rem; }
+#view-user .medals-bar { display: flex; gap: 0.5rem; margin-top: 0.6rem; }
+#view-user .medals-bar[hidden] { display: none; }
+#view-user .medals-bar button { font: inherit; font-size: 0.8rem; font-weight: 600; border: 0; border-radius: 0.7rem; padding: 0.4rem 1rem; cursor: pointer; background: var(--black); color: var(--white); }
+#view-user .m-empty { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.85rem; }
+
+#view-user .medals li.m-empty { background: none; border: 0; padding: 0; margin-top: 0.7rem; color: var(--muted); font-size: 0.85rem; }
+#view-chat .peer-who { flex: 1; display: flex; align-items: center; gap: 0.75rem; min-width: 0; cursor: pointer; }
+#view-chat .peer-who h2 { flex: 1; }
+#view-chat .sx-input input:focus-visible { outline: none; }
+#view-user .store-btn { padding: 0.5rem; }

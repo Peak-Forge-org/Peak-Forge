@@ -8,7 +8,6 @@
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./normalize/normalize.css" />
     <link rel="stylesheet" href="ath_pre_app.css" />
   </head>
   <body>
@@ -21,16 +20,18 @@
           <button class="tab" data-target="forum" role="tab">
             تالار گفت‌وگو
           </button>
+          <button class="tab" data-target="search" role="tab">جست‌وجو</button>
         </div>
       </header>
 
       <section class="panel active" id="chat-coach">
-        <div class="peer">
+        <div class="peer" data-profile="c1" role="button" tabindex="0" aria-label="پروفایل مربی">
           <div class="avatar">ع</div>
           <div>
             <div class="peer-name">مربی علی رضایی</div>
             <div class="peer-status">آنلاین</div>
           </div>
+          <span class="peer-go" aria-hidden="true">‹</span>
         </div>
 
         <div class="messages" id="chat-coachMessages">
@@ -73,12 +74,13 @@
       </section>
 
       <section class="panel" id="chat-forum">
-        <div class="peer">
+        <div class="peer" data-members="f1" role="button" tabindex="0" aria-label="اعضای تالار">
           <div class="avatar group">گ</div>
           <div>
             <div class="peer-name">گروه ورزشکاران مربی علی</div>
             <div class="peer-status">۱۲ عضو · تحت نظر مربی</div>
           </div>
+          <span class="peer-go" aria-hidden="true">‹</span>
         </div>
 
         <div class="messages" id="chat-forumMessages">
@@ -105,6 +107,9 @@
           <button type="submit" class="send-btn" aria-label="ارسال">➤</button>
         </form>
       </section>
+
+      <section class="panel" id="chat-search"><div class="sx-host" id="chat-searchHost"></div></section>
+      <section class="panel" id="chat-thread"></section>
     </main>
     <main id="view-exercise" class="page view" hidden>
       <h1 class="title">برنامه‌ی تمرینی</h1>
@@ -121,13 +126,7 @@
         <div class="ring-wrap">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52" />
-            <circle
-              class="ring-fill"
-              id="exercise-ringFill"
-              cx="60"
-              cy="60"
-              r="52"
-            />
+            <circle class="ring-fill" id="exercise-ringFill" cx="60" cy="60" r="52" />
           </svg>
           <div class="ring-text">
             <strong id="exercise-percent">۰٪</strong>
@@ -177,13 +176,7 @@
         <div class="ring-wrap">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52" />
-            <circle
-              class="ring-fill"
-              id="diet-ringFill"
-              cx="60"
-              cy="60"
-              r="52"
-            />
+            <circle class="ring-fill" id="diet-ringFill" cx="60" cy="60" r="52" />
           </svg>
           <div class="ring-text">
             <strong id="diet-percent">۰٪</strong>
@@ -239,7 +232,7 @@
         <div class="head-info">
           <h1 id="user-fullName"></h1>
           <p class="muted" id="user-place"></p>
-          <p class="muted">مربی: علی رضایی</p>
+          <p class="muted">مربی: <button type="button" class="link-btn" data-profile="c1">علی رضایی</button></p>
         </div>
         <span class="tag">Premium</span>
       </section>
@@ -286,8 +279,12 @@
       </section>
 
       <section class="card">
-        <h2>مدال‌ها و افتخارات</h2>
+        <div class="row-head medals-head">
+          <h2>مدال‌ها و افتخارات</h2>
+          <button type="button" class="btn" id="user-medalsEdit">ویرایش</button>
+        </div>
         <ul class="medals" id="user-medals"></ul>
+        <div class="medals-bar" id="user-medalsBar" hidden></div>
       </section>
 
       <form class="card" id="user-profileForm">
@@ -322,6 +319,14 @@
 
       <section class="card toggle-row">
         <div>
+          <strong>سبد خرید</strong>
+          <p class="muted">محصولات انتخاب‌شده از فروشگاه مربی‌ها</p>
+        </div>
+        <button type="button" class="btn" data-open-cart>مشاهده<span class="sx-count" hidden></span></button>
+      </section>
+
+      <section class="card toggle-row">
+        <div>
           <strong>یادآوری تمرین و برنامه</strong>
           <p class="muted">اعلان روزانه برای تمرین و وعده‌های غذایی</p>
         </div>
@@ -332,45 +337,25 @@
     </main>
 
     <div class="footer">
-      <div
-        class="selected"
-        data-view="chat"
-        data-src="./icons/comments (1).png"
-        data-active-src="./icons/comments (1).svg"
-      >
+      <div class="selected" data-view="chat" data-src="./icons/comments (1).png" data-active-src="./icons/comments (1).svg">
         <a href="#chat">
           <img src="./icons/comments (1).svg" alt="چت" />
         </a>
       </div>
 
-      <div
-        class="icon"
-        data-view="exercise"
-        data-src="./icons/dumbbell-ray.png"
-        data-active-src="./icons/dumbbell-ray.svg"
-      >
+      <div class="icon" data-view="exercise" data-src="./icons/dumbbell-ray.png" data-active-src="./icons/dumbbell-ray.svg">
         <a href="#exercise">
           <img src="./icons/dumbbell-ray.png" alt="تمرین" />
         </a>
       </div>
 
-      <div
-        class="icon"
-        data-view="diet"
-        data-src="./icons/hamburger-soda.png"
-        data-active-src="./icons/hamburger-soda.svg"
-      >
+      <div class="icon" data-view="diet" data-src="./icons/hamburger-soda.png" data-active-src="./icons/hamburger-soda.svg">
         <a href="#diet">
           <img src="./icons/hamburger-soda.png" alt="تغذیه" />
         </a>
       </div>
 
-      <div
-        class="icon"
-        data-view="user"
-        data-src="./icons/user.png"
-        data-active-src="./icons/user.svg"
-      >
+      <div class="icon" data-view="user" data-src="./icons/user.png" data-active-src="./icons/user.svg">
         <a href="#user">
           <img src="./icons/user.png" alt="پروفایل" />
         </a>

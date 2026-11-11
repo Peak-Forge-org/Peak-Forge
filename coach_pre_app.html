@@ -8,7 +8,6 @@
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./normalize/normalize.css" />
     <link rel="stylesheet" href="coach_pre_app.css" />
   </head>
   <body>
@@ -19,6 +18,7 @@
         </button>
         <button class="tab" data-tab="convs" role="tab">گفت‌وگوها</button>
         <button class="tab" data-tab="forums" role="tab">تالارها</button>
+        <button class="tab" data-tab="search" role="tab">جست‌وجو</button>
       </div>
       <section id="chat-view"></section>
     </main>
@@ -40,6 +40,7 @@
         </div>
       </section>
 
+      <!-- اعلان‌ها و هشدارها -->
       <section class="card">
         <div class="row-head">
           <h2>هشدارها <span class="badge" id="athletes-alertN"></span></h2>
@@ -48,6 +49,7 @@
         <div class="alerts" id="athletes-alerts"></div>
       </section>
 
+      <!-- نمودار پیشرفت همه‌ی ورزشکاران -->
       <section class="card">
         <div class="row-head">
           <h2>پیشرفت ورزشکاران</h2>
@@ -62,6 +64,7 @@
         <div class="athletes" id="athletes-athletes"></div>
       </section>
 
+      <!-- افزودن ورزشکار -->
       <form class="card" id="athletes-addForm">
         <h2>افزودن ورزشکار</h2>
         <div class="form-row">
@@ -87,6 +90,7 @@
         </button>
       </div>
 
+      <!-- قالب‌ها -->
       <div id="programs-tplPanel" class="panel">
         <div class="list" id="programs-templates"></div>
         <form class="card" id="programs-tplForm">
@@ -156,6 +160,15 @@
           <p class="muted" id="user-history"></p>
         </div>
         <span class="tag">Premium · مربی</span>
+        <button
+          type="button"
+          class="store-btn"
+          data-store="c1"
+          aria-label="مشاهده‌ی فروشگاه من"
+          title="فروشگاه من"
+        >
+          <img class="sx-ic" src="./icons/store.svg" alt="فروشگاه" />
+        </button>
       </section>
 
       <section class="stats4 three">
@@ -171,8 +184,12 @@
       </section>
 
       <section class="card">
-        <h2>مدال‌ها و افتخارات</h2>
+        <div class="row-head medals-head">
+          <h2>مدال‌ها و افتخارات</h2>
+          <button type="button" class="btn" id="user-medalsEdit">ویرایش</button>
+        </div>
         <ul class="medals" id="user-medals"></ul>
+        <div class="medals-bar" id="user-medalsBar" hidden></div>
       </section>
 
       <form class="card" id="user-profileForm">
@@ -210,6 +227,16 @@
         </div>
       </form>
 
+      <section class="card toggle-row">
+        <div>
+          <strong>سبد خرید</strong>
+          <p class="muted">محصولات انتخاب‌شده از فروشگاه مربی‌ها</p>
+        </div>
+        <button type="button" class="btn" data-open-cart>
+          مشاهده<span class="sx-count" hidden></span>
+        </button>
+      </section>
+
       <!-- فروشگاه -->
       <section class="card" id="user-store">
         <div class="row-head">
@@ -237,6 +264,7 @@
         </p>
       </section>
 
+      <!-- تنظیمات اعلان -->
       <section class="card" id="user-settings">
         <h2>اعلان‌ها و یادآوری</h2>
         <div class="set-row">
@@ -295,13 +323,13 @@
       </div>
 
       <div
-        class="icon"
+        class="selected"
         data-view="athletes"
         data-src="./icons/users.png"
         data-active-src="./icons/users.svg"
       >
         <a href="#athletes">
-          <img src="./icons/users.png" alt="ورزشکاران" />
+          <img src="./icons/users.svg" alt="ورزشکاران" />
         </a>
       </div>
 
